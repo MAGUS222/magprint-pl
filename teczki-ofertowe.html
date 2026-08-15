@@ -150,6 +150,14 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     <div class="calc-grid">
       <div class="calc">
         <div class="field">
+          <div class="lab">Wariant teczki</div>
+          <div class="opts" data-group="wariant" id="wariant-opts">
+            <button class="chip on" data-val="1big">1-bigowa</button>
+            <button class="chip" data-val="2big">2-bigowa (+10% druk)</button>
+          </div>
+        </div>
+
+        <div class="field">
           <div class="lab">Nakład (szt.)</div>
           <div class="opts" data-group="naklad">
             <button class="chip on" data-val="100">100</button>
@@ -191,7 +199,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <a href="/zamowienie?produkt=teczki" class="btn btn-primary" style="width:100%;margin-top:22px">Dodaj do zamówienia</a>
           <a href="/kontakt" class="btn btn-ghost" style="width:100%;margin-top:10px;border:1px solid var(--line)">Wyślij zapytanie ofertowe</a>
           <div class="spec-title" style="margin-top:30px">W cenie</div>
-          <ul class="spec">
+          <ul class="spec" id="spec-list">
             <li><b>Format A4</b> — konstrukcja 1-bigowa</li>
             <li><b>Papier 350 g</b> — sztywny, profesjonalny</li>
             <li><b>Druk CMYK 4/0</b> — pełny kolor przedniej strony</li>
@@ -261,11 +269,17 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
 
 <script>
 (function(){
-  var CENY_DRUK = {
+  var CENY_1BIG = {
     "100": {"netto":240,"brutto":295.20},
     "200": {"netto":390,"brutto":479.70},
     "500": {"netto":690,"brutto":848.70},
     "1000": {"netto":1300,"brutto":1597}
+  };
+  var CENY_2BIG = {
+    "100": {"netto":264,"brutto":324.72},
+    "200": {"netto":429,"brutto":527.67},
+    "500": {"netto":759,"brutto":933.57},
+    "1000": {"netto":1430,"brutto":1758.90}
   };
   var USLACHETNIANIE = {
     "blyszcz": {"nazwa":"Folia błyszcząca","netto":0.60},
@@ -273,9 +287,19 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     "softtouch": {"nazwa":"Folia soft touche","netto":1.20},
     "lakier": {"nazwa":"Lakier miejscowy","netto":2.20}
   };
-  var sel = { naklad:'100' };
+  var sel = { wariant:'1big', naklad:'100' };
   function fmt(n){ return n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
+  function getCenyDruk(){ return sel.wariant === '1big' ? CENY_1BIG : CENY_2BIG; }
+  function updateSpec(){
+    var spec = document.getElementById('spec-list');
+    if(sel.wariant === '1big'){
+      spec.innerHTML = '<li><b>Format A4</b> — konstrukcja 1-bigowa</li><li><b>Papier 350 g</b> — sztywny, profesjonalny</li><li><b>Druk CMYK 4/0</b> — pełny kolor przedniej strony</li><li><b>Uszlachetnianie</b> — opcje dodatkowe</li>';
+    } else {
+      spec.innerHTML = '<li><b>Format A4</b> — konstrukcja 2-bigowa</li><li><b>Papier 350 g</b> — sztywny, profesjonalny</li><li><b>Druk CMYK 4/4</b> — pełny kolor na obu stronach</li><li><b>Uszlachetnianie</b> — opcje dodatkowe</li>';
+    }
+  }
   function licz(){
+    var CENY_DRUK = getCenyDruk();
     var row = CENY_DRUK[sel.naklad];
     var naklad = parseInt(sel.naklad);
     var netto = row.netto;
@@ -295,7 +319,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     br.textContent = fmt(brutto) + ' brutto';
     per.textContent = fmt(per_szt) + ' / szt. brutto · ' + naklad.toLocaleString('pl-PL') + ' szt.';
   }
-  // Nacisk na nakład
+  // Nacisk na opcje (wariant, nakład)
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
       var b = e.target.closest('.chip'); if(!b) return;
@@ -303,6 +327,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       b.classList.add('on');
       var g = group.dataset.group;
       sel[g] = b.dataset.val;
+      if(g === 'wariant') updateSpec();
       licz();
     });
   });
