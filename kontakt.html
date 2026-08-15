@@ -73,7 +73,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
       <p style="margin-top:18px">Sprawdzimy Twój projekt przed drukiem za darmo — wystarczy, że dołączysz plik do wiadomości.</p>
     </div>
 
-    <form action="https://formsubmit.co/biuro@magprint.pl" method="POST">
+    <form action="https://formsubmit.co/biuro@magprint.pl" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="_subject" value="📬 Nowe zapytanie z magprint.pl">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://magprint.pl/kontakt?wyslano=1">
@@ -92,6 +92,8 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
       </select>
       <label for="wiadomosc">Wiadomość</label>
       <textarea id="wiadomosc" name="Wiadomość" required></textarea>
+      <label for="plik">Dołącz plik projektu (opcjonalnie)</label>
+      <input id="plik" name="Plik" type="file" accept=".pdf,.ai,.psd,.jpg,.png,.zip">
       <button type="submit" class="btn">Wyślij zapytanie</button>
     </form>
   </div>
