@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>magprint.pl — druk reklamowy online z wyceną w 30 sekund</title>
+<meta name="description" content="Ulotki, teczki ofertowe i torby reklamowe z nadrukiem — wyceń online w 30 sekund i zamów z wysyłką w całej Polsce. Bez dzwonienia, bez czekania na ofertę.">
+<link rel="canonical" href="https://magprint.pl/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="magprint.pl — druk reklamowy online z wyceną w 30 sekund">
+<meta property="og:description" content="Ulotki, teczki ofertowe i torby reklamowe z nadrukiem. Policz cenę online i zamów z wysyłką w całej Polsce.">
+<meta property="og:url" content="https://magprint.pl/">
+<meta property="og:image" content="https://magprint.pl/img/magprint-og.jpg">
+<meta property="og:locale" content="pl_PL">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"magprint.pl","url":"https://magprint.pl","description":"Drukarnia online z wyceną w czasie rzeczywistym — ulotki, teczki ofertowe, torby reklamowe.","areaServed":"PL"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"magprint.pl","item":"https://magprint.pl"}]}
+</script>
+
+<style>
+:root{
+  --bg:#ffffff; --paper:#f6f3ee; --paper2:#efe9e0;
+  --ink:#1b1a18; --muted:#736e66; --line:#e5dfd5;
+  --gold:#a9865f; --gold-d:#8f6f4c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces','Georgia',serif;font-weight:500;letter-spacing:-.01em;line-height:1.12}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);font-weight:600}
+
+header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;letter-spacing:-.02em}
+.logo b{color:var(--gold-d);font-weight:600}
+nav.top{display:flex;gap:6px}
+nav.top a{font-size:14px;padding:8px 12px;border-radius:8px;color:var(--muted);transition:.15s}
+nav.top a:hover{color:var(--ink)}
+@media(max-width:880px){nav.top{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:2px;font-weight:500;cursor:pointer;font-size:15px;padding:14px 26px;transition:.18s;font-family:inherit}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{padding:10px 18px;font-size:14px}
+
+.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;background:linear-gradient(180deg,#fff, var(--paper))}
+.hero>.wrap{width:100%;padding-top:32px;padding-bottom:32px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+h1.h1{font-size:56px;margin:20px 0 24px}
+.lead{font-size:19px;color:var(--muted);max-width:470px;margin-bottom:34px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.usp{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.usp span{display:flex;align-items:center;gap:7px}
+.usp i{color:var(--gold-d);font-style:normal}
+.hero-img{position:relative;height:74vh;max-height:620px;border-radius:3px;background:radial-gradient(120% 120% at 70% 20%, var(--paper) 0%, var(--paper2) 100%);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a89a86}
+.hero-img .glyph{font-size:56px;opacity:.7}
+.hero-img .cap{font-size:13px;letter-spacing:.04em;margin-top:12px}
+.hero-img::after{content:"";position:absolute;inset:16px;border:1px solid rgba(169,134,95,.25);border-radius:2px;pointer-events:none}
+@media(max-width:880px){
+  .hero{min-height:auto}
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  h1.h1{font-size:38px}
+  .hero-img{height:48vh;order:-1}
+}
+
+section.blk{padding:88px 0}
+section.blk.paper{background:var(--paper)}
+h2.sec{font-size:36px;margin-bottom:14px}
+@media(max-width:880px){h2.sec{font-size:28px}section.blk{padding:56px 0}}
+.sec-lead{color:var(--muted);max-width:600px;margin-bottom:44px;font-size:17px}
+.sec-head{margin-bottom:44px}
+.sec-head .eyebrow{margin-bottom:14px;display:block}
+
+.kategorie{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+@media(max-width:880px){.kategorie{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.kategorie{grid-template-columns:1fr}}
+.kat{background:#fff;padding:34px 28px;transition:.15s;display:block}
+.kat:hover{background:var(--paper)}
+.kat .ic{font-size:30px}
+.kat h3{font-size:20px;margin:14px 0 8px;font-weight:500}
+.kat p{font-size:14px;color:var(--muted);margin-bottom:14px}
+.kat .cta{font-size:13px;font-weight:600;color:var(--gold-d)}
+.kat.soon{opacity:.5;cursor:default}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+@media(max-width:820px){.grid3{grid-template-columns:1fr;gap:26px}}
+.krok .n{font-family:'Fraunces',serif;font-size:34px;color:var(--gold-d);margin-bottom:10px}
+.krok h3{font-size:19px;font-weight:500;margin-bottom:6px}
+.krok p{font-size:15px;color:var(--muted)}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+@media(max-width:880px){.grid4{grid-template-columns:1fr 1fr}}
+.cell{background:#fff;padding:30px 24px}
+.cell .ic{font-size:24px}
+.cell h3{font-size:17px;margin:12px 0 6px;font-weight:500}
+.cell p{font-size:14px;color:var(--muted)}
+
+.cta{background:var(--ink);color:#fff;border-radius:3px;padding:80px 40px;text-align:center}
+.cta .eyebrow{color:var(--gold);margin-bottom:16px;display:block}
+.cta h2{font-size:38px;margin-bottom:14px;color:#fff}
+.cta p{color:#b6b1a8;margin-bottom:30px;font-size:17px}
+.cta .btn-primary{background:#fff;color:var(--ink)}
+.cta .btn-primary:hover{background:var(--paper)}
+@media(max-width:820px){.cta{padding:56px 24px}.cta h2{font-size:28px}}
+
+footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 40px;font-size:14px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px}
+.foot a{display:block;margin:6px 0;color:var(--muted)}
+.foot a:hover{color:var(--ink)}
+.foot strong{color:var(--ink);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.foot-bottom{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-size:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hdr">
+    <a href="/" class="logo"><b>mag</b>print<span style="color:var(--muted);font-weight:400">.pl</span></a>
+    <nav class="top">
+      <a href="/ulotki">Ulotki</a>
+      <a href="/teczki-ofertowe">Teczki</a>
+      <a href="/torby-reklamowe">Torby</a>
+      <a href="/jak-zamawiac">Jak zamawiać</a>
+      <a href="/kontakt">Kontakt</a>
+    </nav>
+    <a href="/ulotki#kalkulator" class="btn btn-primary btn-sm">Wyceń online</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Druk reklamowy online · wycena w 30 sekund</span>
+        <h1 class="h1">Profesjonalny druk<br>bez dzwonienia i czekania na ofertę</h1>
+        <p class="lead">
+          Ulotki, teczki ofertowe i torby reklamowe z nadrukiem — policzysz cenę sam,
+          zamówisz online i odbierzesz gotowy nakład w kilka dni. Bez ukrytych kosztów
+          i bez negocjacji.
+        </p>
+        <div class="cta-row">
+          <a href="/ulotki#kalkulator" class="btn btn-primary">Policz cenę ulotek</a>
+          <a href="#oferta" class="btn btn-ghost">Zobacz ofertę</a>
+        </div>
+        <div class="usp">
+          <span><i>✓</i> Wycena natychmiast</span>
+          <span><i>✓</i> Sprawdzenie plików gratis</span>
+          <span><i>✓</i> Wysyłka w całej Polsce</span>
+        </div>
+      </div>
+      <div class="hero-img" role="img" aria-label="Druk reklamowy magprint.pl">
+        <div class="glyph">🖨️</div>
+        <div class="cap">Miejsce na zdjęcie realizacji</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="oferta">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Co drukujemy</span>
+      <h2 class="sec">Wybierz kategorię i wyceń</h2>
+      <p class="sec-lead" style="margin-bottom:0">Każda kategoria ma własny kalkulator — wybierasz parametry, cenę widzisz od razu.</p>
+    </div>
+    <div class="kategorie">
+      <a class="kat" href="/ulotki">
+        <div class="ic">📄</div>
+        <h3>Ulotki</h3>
+        <p>A3–A6, papier 170–300 g, druk dwustronny. Od pojedynczej promocji po duży nakład.</p>
+        <div class="cta">Wyceń online →</div>
+      </a>
+      <a class="kat" href="/teczki-ofertowe">
+        <div class="ic">📁</div>
+        <h3>Teczki ofertowe</h3>
+        <p>A4, dwubigowe, folia mat, druk dwustronny — na oferty handlowe i materiały firmowe.</p>
+        <div class="cta">Wyceń online →</div>
+      </a>
+      <a class="kat" href="/torby-reklamowe">
+        <div class="ic">🛍️</div>
+        <h3>Torby reklamowe</h3>
+        <p>Karton 200 g, folia błysk, sznurek — ekologiczny nośnik marki od 100 sztuk.</p>
+        <div class="cta">Wyceń online →</div>
+      </a>
+      <div class="kat soon">
+        <div class="ic">🪪</div>
+        <h3>Wizytówki</h3>
+        <p>Standardowe i premium (lakier UV 3D).</p>
+        <div class="cta">Wkrótce</div>
+      </div>
+      <div class="kat soon">
+        <div class="ic">🏷️</div>
+        <h3>Etykiety i naklejki</h3>
+        <p>Papierowe i foliowe, wycinane po obrysie.</p>
+        <div class="cta">Wkrótce</div>
+      </div>
+      <div class="kat soon">
+        <div class="ic">📆</div>
+        <h3>Kalendarze i katalogi</h3>
+        <p>Trójdzielne, spiralowane i klejone.</p>
+        <div class="cta">Wkrótce</div>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:var(--muted);font-size:14px">
+      Potrzebujesz czegoś, czego jeszcze nie widzisz na liście? <a href="/kontakt" style="color:var(--gold-d);text-decoration:underline">Napisz do nas</a> — wycenimy indywidualnie.
+    </p>
+  </div>
+</section>
+
+<section class="blk paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Dlaczego magprint.pl</span>
+      <h2 class="sec">Druk bez niespodzianek</h2>
+    </div>
+    <div class="grid4">
+      <div class="cell"><div class="ic">💸</div><h3>Cena od razu</h3><p>Widzisz kwotę zanim zamówisz. Zero „prześlemy ofertę do 48h”.</p></div>
+      <div class="cell"><div class="ic">🛡️</div><h3>Sprawdzenie plików</h3><p>Weryfikujemy Twój projekt przed drukiem — informujemy, jeśli coś jest nie tak.</p></div>
+      <div class="cell"><div class="ic">🚚</div><h3>Terminy, które trzymamy</h3><p>Standardowo kilka dni roboczych, ekspres na życzenie.</p></div>
+      <div class="cell"><div class="ic">♻️</div><h3>Poprawka gratis</h3><p>Jeśli błąd jest po naszej stronie — dodruk bez dopłaty.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Proces</span>
+      <h2 class="sec">Jak zamówić</h2>
+    </div>
+    <div class="grid3">
+      <div class="krok"><div class="n">01</div><h3>Wybierz i wyceń</h3><p>Ustaw parametry w kalkulatorze — cenę widzisz od razu, bez logowania.</p></div>
+      <div class="krok"><div class="n">02</div><h3>Wgraj projekt</h3><p>Prześlij gotowy plik. Sprawdzamy przygotowanie do druku za darmo.</p></div>
+      <div class="krok"><div class="n">03</div><h3>Odbierz nakład</h3><p>Drukujemy i wysyłamy pod wskazany adres w całej Polsce.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding-bottom:88px">
+  <div class="cta">
+    <span class="eyebrow">magprint.pl</span>
+    <h2>Policz cenę swojego zlecenia</h2>
+    <p>Kalkulator online, gotowy wynik w 30 sekund.</p>
+    <a href="/ulotki#kalkulator" class="btn btn-primary">Wyceń teraz</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div style="max-width:280px">
+        <div class="logo" style="font-size:20px"><b>mag</b>print<span style="color:var(--muted);font-weight:400">.pl</span></div>
+        <p style="margin-top:10px">Druk reklamowy online z natychmiastową wyceną. Ulotki, teczki ofertowe, torby i więcej.</p>
+      </div>
+      <div>
+        <strong>Oferta</strong>
+        <a href="/ulotki">Ulotki</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a>
+      </div>
+      <div>
+        <strong>Informacje</strong>
+        <a href="/jak-zamawiac">Jak zamawiać</a><a href="/kontakt">Kontakt</a><a href="/polityka-prywatnosci">Polityka prywatności</a><a href="/rodo">RODO</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 magprint.pl</div>
+  </div>
+</footer>
+
+</body>
+</html>
