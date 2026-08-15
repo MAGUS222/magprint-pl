@@ -67,16 +67,17 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
   <div class="grid">
     <div class="card">
       <h2>Dane kontaktowe</h2>
-      <p><b>E-mail:</b> [adres e-mail]</p>
-      <p><b>Telefon:</b> [numer telefonu]</p>
-      <p><b>Godziny obsługi:</b> pon–pt, 9:00–17:00</p>
+      <p><b>E-mail:</b> <a href="mailto:biuro@magprint.pl" style="color:var(--gold-d);text-decoration:underline">biuro@magprint.pl</a></p>
+      <p><b>Telefon:</b> <a href="tel:+48570001316" style="color:var(--gold-d);text-decoration:underline">570 001 316</a></p>
+      <p><b>Godziny obsługi:</b> pon–pt, 9:00–15:00</p>
       <p style="margin-top:18px">Sprawdzimy Twój projekt przed drukiem za darmo — wystarczy, że dołączysz plik do wiadomości.</p>
     </div>
 
-    <form action="https://formsubmit.co/[adres-email]" method="POST">
-      <input type="hidden" name="_subject" value="Nowe zapytanie z magprint.pl">
+    <form action="https://formsubmit.co/biuro@magprint.pl" method="POST">
+      <input type="hidden" name="_subject" value="📬 Nowe zapytanie z magprint.pl">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://magprint.pl/kontakt?wyslano=1">
+      <input type="hidden" name="Zrodlo" value="Formularz kontaktowy">
       <label for="imie">Imię i nazwisko</label>
       <input id="imie" name="Imię i nazwisko" type="text" required>
       <label for="email">E-mail</label>
