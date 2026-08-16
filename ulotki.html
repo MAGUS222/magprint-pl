@@ -192,7 +192,15 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <div class="net" id="net">—</div>
           <div class="br" id="br">—</div>
           <div class="per" id="per">—</div>
-          <button type="button" id="dodaj-btn" class="btn btn-primary" style="width:100%;margin-top:22px">Dodaj do zamówienia</button>
+          <form method="GET" action="/zamowienie" style="width:100%;margin-top:22px">
+            <input type="hidden" name="produkt" value="ulotki">
+            <input type="hidden" name="format" id="format-field" value="A5">
+            <input type="hidden" name="gramatura" id="gramatura-field" value="170">
+            <input type="hidden" name="naklad" id="naklad-field" value="1000">
+            <input type="hidden" name="netto" id="netto-field" value="">
+            <input type="hidden" name="brutto" id="brutto-field" value="">
+            <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
+          </form>
           <a href="/kontakt" class="btn btn-ghost" style="width:100%;margin-top:10px;border:1px solid var(--line)">Wyślij zapytanie ofertowe</a>
           <div class="spec-title" style="margin-top:30px">W cenie</div>
           <ul class="spec">
@@ -276,6 +284,13 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     net.textContent = fmt(row.netto);
     br.textContent  = fmt(row.brutto) + ' brutto';
     per.textContent = fmt(row.perszt) + ' / szt. brutto · ' + Number(sel.naklad).toLocaleString('pl-PL') + ' szt.';
+
+    // Aktualizuj hidden fields w formie
+    document.getElementById('format-field').value = sel.format;
+    document.getElementById('gramatura-field').value = sel.gramatura;
+    document.getElementById('naklad-field').value = sel.naklad;
+    document.getElementById('netto-field').value = Math.round(row.netto * 100) / 100;
+    document.getElementById('brutto-field').value = Math.round(row.brutto * 100) / 100;
   }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
@@ -290,21 +305,6 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       }
       licz();
     });
-  });
-
-  // Przycisk "Dodaj do zamówienia"
-  document.getElementById('dodaj-btn').addEventListener('click', function(){
-    var row = CENY[sel.format][sel.gramatura][sel.naklad];
-    var netto = row.netto;
-    var brutto = row.brutto;
-
-    var url = '/zamowienie?produkt=ulotki' +
-      '&format=' + sel.format +
-      '&gramatura=' + sel.gramatura + 'g' +
-      '&naklad=' + sel.naklad +
-      '&netto=' + Math.round(netto * 100) / 100 +
-      '&brutto=' + Math.round(brutto * 100) / 100;
-    window.location.href = url;
   });
 
   licz();
