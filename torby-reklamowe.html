@@ -419,10 +419,13 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     per.textContent = fmt(brutto/sel.szt) + ' / szt. brutto · ' + sel.szt.toLocaleString('pl-PL') + ' szt.';
 
     // Aktualizuj hidden fields w formie
+    var netto_rounded = Math.round(netto * 100) / 100;
+    var brutto_rounded = Math.round(brutto * 100) / 100;
     document.getElementById('rozmiar-field').value = sel.rozmiar;
     document.getElementById('naklad-field').value = sel.szt;
-    document.getElementById('netto-field').value = Math.round(netto * 100) / 100;
-    document.getElementById('brutto-field').value = Math.round(brutto * 100) / 100;
+    document.getElementById('netto-field').value = netto_rounded;
+    document.getElementById('brutto-field').value = brutto_rounded;
+    console.log('licz() na torby ustawił:', {rozmiar: sel.rozmiar, naklad: sel.szt, netto: netto_rounded, brutto: brutto_rounded});
   }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
