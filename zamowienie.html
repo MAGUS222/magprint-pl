@@ -144,24 +144,31 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
 
 <script>
 (function(){
-  var params = new URLSearchParams(window.location.search);
+  // Parsuj URL ręcznie
+  var search = window.location.search.substring(1);
+  var urlParams = {};
+  search.split('&').forEach(function(param){
+    var parts = param.split('=');
+    if(parts[0]) urlParams[parts[0]] = decodeURIComponent(parts[1] || '');
+  });
+
   var produkty = {
     'ulotki': 'Ulotki reklamowe',
     'teczki': 'Teczki ofertowe',
     'torby': 'Torby reklamowe'
   };
-  var produkt = params.get('produkt') || 'ulotki';
+  var produkt = urlParams['produkt'] || 'ulotki';
   var nazwa = produkty[produkt] || 'Produkt';
 
   document.getElementById('produkt-info').textContent = nazwa;
   document.getElementById('produkt-field').value = nazwa;
 
   // Jeśli są dane z kalkulatora — wyświetl je
-  var wariant = params.get('wariant');
-  var naklad = params.get('naklad');
-  var opcje = params.get('opcje');
-  var netto = params.get('netto');
-  var brutto = params.get('brutto');
+  var wariant = urlParams['wariant'];
+  var naklad = urlParams['naklad'];
+  var opcje = urlParams['opcje'];
+  var netto = urlParams['netto'];
+  var brutto = urlParams['brutto'];
 
   if(naklad){
     var summaryBox = document.getElementById('summary-data');
