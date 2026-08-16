@@ -197,8 +197,8 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
             <input type="hidden" name="format" id="format-field" value="A5">
             <input type="hidden" name="gramatura" id="gramatura-field" value="170">
             <input type="hidden" name="naklad" id="naklad-field" value="1000">
-            <input type="hidden" name="netto" id="netto-field" value="670.7">
-            <input type="hidden" name="brutto" id="brutto-field" value="824.96">
+            <input type="hidden" name="netto" id="netto-field" value="218.17">
+            <input type="hidden" name="brutto" id="brutto-field" value="268.35">
             <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
           </form>
           <a href="/kontakt" class="btn btn-ghost" style="width:100%;margin-top:10px;border:1px solid var(--line)">Wyślij zapytanie ofertowe</a>
@@ -273,38 +273,23 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
 
 <script>
 (function(){
-  // Ceny sprzedaży BRUTTO dla klienta = katalog Chroma × 0,9 (netto), + VAT 23%.
-  // Model w tle (niewidoczny): dostawca dobierany wg nakładu (Chroma / DrukujSam), klient widzi tylko cenę końcową.
-  var CENY = {"A3":{"170":{"10":{"netto":75.4,"brutto":92.74,"perszt":9.27},"50":{"netto":153.08,"brutto":188.29,"perszt":3.77},"100":{"netto":220.18,"brutto":270.82,"perszt":2.71},"250":{"netto":385.0,"brutto":473.55,"perszt":1.89},"500":{"netto":518.45,"brutto":637.69,"perszt":1.28},"1000":{"netto":670.7,"brutto":824.96,"perszt":0.82},"2000":{"netto":1017.7,"brutto":1251.77,"perszt":0.63},"2500":{"netto":1133.52,"brutto":1394.23,"perszt":0.56},"5000":{"netto":1766.42,"brutto":2172.7,"perszt":0.43},"10000":{"netto":3076.92,"brutto":3784.61,"perszt":0.38},"20000":{"netto":5794.17,"brutto":7126.83,"perszt":0.36}},"300":{"10":{"netto":81.44,"brutto":100.17,"perszt":10.02},"50":{"netto":187.13,"brutto":230.17,"perszt":4.6},"100":{"netto":269.84,"brutto":331.9,"perszt":3.32},"250":{"netto":489.2,"brutto":601.72,"perszt":2.41},"500":{"netto":702.24,"brutto":863.76,"perszt":1.73},"1000":{"netto":965.36,"brutto":1187.39,"perszt":1.19},"2000":{"netto":1430.13,"brutto":1759.06,"perszt":0.88},"2500":{"netto":1676.36,"brutto":2061.92,"perszt":0.82},"5000":{"netto":2694.84,"brutto":3314.65,"perszt":0.66},"10000":{"netto":4786.84,"brutto":5887.81,"perszt":0.59},"20000":{"netto":9338.36,"brutto":11486.18,"perszt":0.57}}},"A4":{"170":{"10":{"netto":59.9,"brutto":73.68,"perszt":7.37},"50":{"netto":105.42,"brutto":129.67,"perszt":2.59},"100":{"netto":145.93,"brutto":179.49,"perszt":1.79},"250":{"netto":215.68,"brutto":265.29,"perszt":1.06},"500":{"netto":273.26,"brutto":336.11,"perszt":0.67},"1000":{"netto":351.05,"brutto":431.79,"perszt":0.43},"2000":{"netto":510.2,"brutto":627.55,"perszt":0.31},"2500":{"netto":569.09,"brutto":699.98,"perszt":0.28},"5000":{"netto":888.12,"brutto":1092.39,"perszt":0.22},"10000":{"netto":1580.69,"brutto":1944.25,"perszt":0.19},"20000":{"netto":2927.45,"brutto":3600.76,"perszt":0.18}},"300":{"10":{"netto":70.1,"brutto":86.22,"perszt":8.62},"50":{"netto":125.76,"brutto":154.68,"perszt":3.09},"100":{"netto":175.98,"brutto":216.46,"perszt":2.16},"250":{"netto":282.02,"brutto":346.88,"perszt":1.39},"500":{"netto":394.86,"brutto":485.68,"perszt":0.97},"1000":{"netto":492.79,"brutto":606.13,"perszt":0.61},"2000":{"netto":700.27,"brutto":861.33,"perszt":0.43},"2500":{"netto":804.9,"brutto":990.03,"perszt":0.4},"5000":{"netto":1301.8,"brutto":1601.21,"perszt":0.32},"10000":{"netto":2443.09,"brutto":3005.0,"perszt":0.3},"20000":{"netto":4532.31,"brutto":5574.74,"perszt":0.28}}},"A5":{"170":{"10":{"netto":47.84,"brutto":58.84,"perszt":5.88},"50":{"netto":85.01,"brutto":104.56,"perszt":2.09},"100":{"netto":106.45,"brutto":130.93,"perszt":1.31},"250":{"netto":146.02,"brutto":179.6,"perszt":0.72},"500":{"netto":177.22,"brutto":217.98,"perszt":0.44},"1000":{"netto":218.17,"brutto":268.35,"perszt":0.27},"2000":{"netto":293.33,"brutto":360.8,"perszt":0.18},"2500":{"netto":328.4,"brutto":403.93,"perszt":0.16},"5000":{"netto":477.26,"brutto":587.03,"perszt":0.12},"10000":{"netto":833.98,"brutto":1025.8,"perszt":0.1},"20000":{"netto":1505.1,"brutto":1851.27,"perszt":0.09}},"300":{"10":{"netto":52.89,"brutto":65.05,"perszt":6.5},"50":{"netto":107.42,"brutto":132.13,"perszt":2.64},"100":{"netto":134.41,"brutto":165.32,"perszt":1.65},"250":{"netto":190.22,"brutto":233.97,"perszt":0.94},"500":{"netto":230.34,"brutto":283.32,"perszt":0.57},"1000":{"netto":273.59,"brutto":336.52,"perszt":0.34},"2000":{"netto":361.68,"brutto":444.87,"perszt":0.22},"2500":{"netto":418.08,"brutto":514.24,"perszt":0.21},"5000":{"netto":675.25,"brutto":830.56,"perszt":0.17},"10000":{"netto":1249.01,"brutto":1536.28,"perszt":0.15},"20000":{"netto":2391.77,"brutto":2941.88,"perszt":0.15}}},"A6":{"170":{"10":{"netto":43.13,"brutto":53.05,"perszt":5.3},"50":{"netto":72.99,"brutto":89.78,"perszt":1.8},"100":{"netto":81.43,"brutto":100.16,"perszt":1.0},"250":{"netto":99.26,"brutto":122.09,"perszt":0.49},"500":{"netto":118.37,"brutto":145.6,"perszt":0.29},"1000":{"netto":135.42,"brutto":166.57,"perszt":0.17},"2000":{"netto":189.5,"brutto":233.09,"perszt":0.12},"2500":{"netto":192.82,"brutto":237.17,"perszt":0.09},"5000":{"netto":272.33,"brutto":334.97,"perszt":0.07},"10000":{"netto":436.09,"brutto":536.39,"perszt":0.05},"20000":{"netto":798.69,"brutto":982.39,"perszt":0.05}},"300":{"10":{"netto":45.59,"brutto":56.08,"perszt":5.61},"50":{"netto":93.28,"brutto":114.73,"perszt":2.29},"100":{"netto":103.81,"brutto":127.69,"perszt":1.28},"250":{"netto":127.58,"brutto":156.92,"perszt":0.63},"500":{"netto":156.84,"brutto":192.91,"perszt":0.39},"1000":{"netto":173.33,"brutto":213.2,"perszt":0.21},"2000":{"netto":219.34,"brutto":269.79,"perszt":0.13},"2500":{"netto":244.15,"brutto":300.3,"perszt":0.12},"5000":{"netto":380.78,"brutto":468.36,"perszt":0.09},"10000":{"netto":668.76,"brutto":822.57,"perszt":0.08},"20000":{"netto":1245.22,"brutto":1531.62,"perszt":0.08}}}};
-  var sel = { format:'A5', gramatura:'170', naklad:'1000' };
+  var CENY = {"A3_170":{"10":{"netto":75.4,"brutto":92.74},"50":{"netto":153.08,"brutto":188.29},"100":{"netto":220.18,"brutto":270.82},"250":{"netto":385.0,"brutto":473.55},"500":{"netto":518.45,"brutto":637.69},"1000":{"netto":670.7,"brutto":824.96},"2000":{"netto":1017.7,"brutto":1251.77},"2500":{"netto":1133.52,"brutto":1394.23},"5000":{"netto":1766.42,"brutto":2172.7},"10000":{"netto":3076.92,"brutto":3784.61},"20000":{"netto":5794.17,"brutto":7126.83}},"A3_300":{"10":{"netto":81.44,"brutto":100.17},"50":{"netto":187.13,"brutto":230.17},"100":{"netto":269.84,"brutto":331.9},"250":{"netto":489.2,"brutto":601.72},"500":{"netto":702.24,"brutto":863.76},"1000":{"netto":965.36,"brutto":1187.39},"2000":{"netto":1430.13,"brutto":1759.06},"2500":{"netto":1676.36,"brutto":2061.92},"5000":{"netto":2694.84,"brutto":3314.65},"10000":{"netto":4786.84,"brutto":5887.81},"20000":{"netto":9338.36,"brutto":11486.18}},"A4_170":{"10":{"netto":59.9,"brutto":73.68},"50":{"netto":105.42,"brutto":129.67},"100":{"netto":145.93,"brutto":179.49},"250":{"netto":215.68,"brutto":265.29},"500":{"netto":273.26,"brutto":336.11},"1000":{"netto":351.05,"brutto":431.79},"2000":{"netto":510.2,"brutto":627.55},"2500":{"netto":569.09,"brutto":699.98},"5000":{"netto":888.12,"brutto":1092.39},"10000":{"netto":1580.69,"brutto":1944.25},"20000":{"netto":2927.45,"brutto":3600.76}},"A4_300":{"10":{"netto":70.1,"brutto":86.22},"50":{"netto":125.76,"brutto":154.68},"100":{"netto":175.98,"brutto":216.46},"250":{"netto":282.02,"brutto":346.88},"500":{"netto":394.86,"brutto":485.68},"1000":{"netto":492.79,"brutto":606.13},"2000":{"netto":700.27,"brutto":861.33},"2500":{"netto":804.9,"brutto":990.03},"5000":{"netto":1301.8,"brutto":1601.21},"10000":{"netto":2443.09,"brutto":3005.0},"20000":{"netto":4532.31,"brutto":5574.74}},"A5_170":{"10":{"netto":47.84,"brutto":58.84},"50":{"netto":85.01,"brutto":104.56},"100":{"netto":106.45,"brutto":130.93},"250":{"netto":146.02,"brutto":179.6},"500":{"netto":177.22,"brutto":217.98},"1000":{"netto":218.17,"brutto":268.35},"2000":{"netto":293.33,"brutto":360.8},"2500":{"netto":328.4,"brutto":403.93},"5000":{"netto":477.26,"brutto":587.03},"10000":{"netto":833.98,"brutto":1025.8},"20000":{"netto":1505.1,"brutto":1851.27}},"A5_300":{"10":{"netto":52.89,"brutto":65.05},"50":{"netto":107.42,"brutto":132.13},"100":{"netto":134.41,"brutto":165.32},"250":{"netto":190.22,"brutto":233.97},"500":{"netto":230.34,"brutto":283.32},"1000":{"netto":273.59,"brutto":336.52},"2000":{"netto":361.68,"brutto":444.87},"2500":{"netto":418.08,"brutto":514.24},"5000":{"netto":675.25,"brutto":830.56},"10000":{"netto":1249.01,"brutto":1536.28},"20000":{"netto":2391.77,"brutto":2941.88}},"A6_170":{"10":{"netto":43.13,"brutto":53.05},"50":{"netto":72.99,"brutto":89.78},"100":{"netto":81.43,"brutto":100.16},"250":{"netto":99.26,"brutto":122.09},"500":{"netto":118.37,"brutto":145.6},"1000":{"netto":135.42,"brutto":166.57},"2000":{"netto":189.5,"brutto":233.09},"2500":{"netto":192.82,"brutto":237.17},"5000":{"netto":272.33,"brutto":334.97},"10000":{"netto":436.09,"brutto":536.39},"20000":{"netto":798.69,"brutto":982.39}},"A6_300":{"10":{"netto":45.59,"brutto":56.08},"50":{"netto":93.28,"brutto":114.73},"100":{"netto":103.81,"brutto":127.69},"250":{"netto":127.58,"brutto":156.92},"500":{"netto":156.84,"brutto":192.91},"1000":{"netto":173.33,"brutto":213.2},"2000":{"netto":219.34,"brutto":269.79},"2500":{"netto":244.15,"brutto":300.3},"5000":{"netto":380.78,"brutto":468.36},"10000":{"netto":668.76,"brutto":822.57},"20000":{"netto":1245.22,"brutto":1531.62}}};
+  var sel = { spec: 'A5_170', naklad: '1000' };
   function fmt(n){ return n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
   function licz(){
-    var row = CENY[sel.format][sel.gramatura][sel.naklad];
-    if(!row){
-      console.error('BŁĄD: brakuje cen dla', {format:sel.format, gramatura:sel.gramatura, naklad:sel.naklad});
-      return;
-    }
+    var row = CENY[sel.spec][sel.naklad];
+    if(!row) return;
     var net = document.getElementById('net'), br = document.getElementById('br'), per = document.getElementById('per');
     net.textContent = fmt(row.netto);
-    br.textContent  = fmt(row.brutto) + ' brutto';
-    per.textContent = fmt(row.perszt) + ' / szt. brutto · ' + Number(sel.naklad).toLocaleString('pl-PL') + ' szt.';
-
-    // Aktualizuj hidden fields w formie
-    var netto_val = Math.round(row.netto * 100) / 100;
-    var brutto_val = Math.round(row.brutto * 100) / 100;
-    var fields = {
-      'format-field': sel.format,
-      'gramatura-field': sel.gramatura,
-      'naklad-field': sel.naklad,
-      'netto-field': netto_val,
-      'brutto-field': brutto_val
-    };
-    Object.keys(fields).forEach(function(id){
-      var el = document.getElementById(id);
-      if(!el) { console.error('BŁĄD: element nie znaleziony:', id); return; }
-      el.value = fields[id];
-    });
-    console.log('licz() ustawił:', {format:sel.format, gramatura:sel.gramatura, naklad:sel.naklad, netto:netto_val, brutto:brutto_val});
+    br.textContent = fmt(row.brutto) + ' brutto';
+    var szt = parseInt(sel.naklad, 10);
+    per.textContent = fmt(row.brutto/szt) + ' / szt. brutto · ' + szt.toLocaleString('pl-PL') + ' szt.';
+    var spec_parts = sel.spec.split('_');
+    document.getElementById('format-field').value = spec_parts[0];
+    document.getElementById('gramatura-field').value = spec_parts[1];
+    document.getElementById('naklad-field').value = sel.naklad;
+    document.getElementById('netto-field').value = String(Math.round(row.netto * 100) / 100);
+    document.getElementById('brutto-field').value = String(Math.round(row.brutto * 100) / 100);
   }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
@@ -314,8 +299,10 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       var g = group.dataset.group;
       if(g==='naklad'){
         sel.naklad = b.dataset.val;
-      } else {
-        sel[g] = b.dataset.val;
+      } else if(g==='format' || g==='gramatura'){
+        var fmt_val = document.querySelector('.opts[data-group="format"] .chip.on').dataset.val;
+        var gram_val = document.querySelector('.opts[data-group="gramatura"] .chip.on').dataset.val;
+        sel.spec = fmt_val + '_' + gram_val;
       }
       licz();
     });
