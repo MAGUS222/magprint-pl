@@ -144,31 +144,30 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
 
 <script>
 (function(){
-  // Parsuj URL ręcznie
-  var search = window.location.search.substring(1);
-  var urlParams = {};
-  search.split('&').forEach(function(param){
-    var parts = param.split('=');
-    if(parts[0]) urlParams[parts[0]] = decodeURIComponent(parts[1] || '');
-  });
+  // Parsuj URL ręcznie - prostsza, bardziej niezawodna metoda
+  function getParam(name){
+    var regex = new RegExp('[?&]' + name + '=([^&]*)');
+    var result = regex.exec(window.location.search);
+    return result ? decodeURIComponent(result[1]) : '';
+  }
 
   var produkty = {
     'ulotki': 'Ulotki reklamowe',
     'teczki': 'Teczki ofertowe',
     'torby': 'Torby reklamowe'
   };
-  var produkt = urlParams['produkt'] || 'ulotki';
+  var produkt = getParam('produkt') || 'ulotki';
   var nazwa = produkty[produkt] || 'Produkt';
 
   document.getElementById('produkt-info').textContent = nazwa;
   document.getElementById('produkt-field').value = nazwa;
 
   // Jeśli są dane z kalkulatora — wyświetl je
-  var wariant = urlParams['wariant'];
-  var naklad = urlParams['naklad'];
-  var opcje = urlParams['opcje'];
-  var netto = urlParams['netto'];
-  var brutto = urlParams['brutto'];
+  var wariant = getParam('wariant');
+  var naklad = getParam('naklad');
+  var opcje = getParam('opcje');
+  var netto = getParam('netto');
+  var brutto = getParam('brutto');
 
   if(naklad){
     var summaryBox = document.getElementById('summary-data');
