@@ -280,17 +280,24 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
   function fmt(n){ return n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
   function licz(){
     var row = CENY[sel.format][sel.gramatura][sel.naklad];
+    if(!row){
+      console.error('BŁĄD: brakuje cen dla', {format:sel.format, gramatura:sel.gramatura, naklad:sel.naklad});
+      return;
+    }
     var net = document.getElementById('net'), br = document.getElementById('br'), per = document.getElementById('per');
     net.textContent = fmt(row.netto);
     br.textContent  = fmt(row.brutto) + ' brutto';
     per.textContent = fmt(row.perszt) + ' / szt. brutto · ' + Number(sel.naklad).toLocaleString('pl-PL') + ' szt.';
 
     // Aktualizuj hidden fields w formie
+    var netto_val = Math.round(row.netto * 100) / 100;
+    var brutto_val = Math.round(row.brutto * 100) / 100;
     document.getElementById('format-field').value = sel.format;
     document.getElementById('gramatura-field').value = sel.gramatura;
     document.getElementById('naklad-field').value = sel.naklad;
-    document.getElementById('netto-field').value = Math.round(row.netto * 100) / 100;
-    document.getElementById('brutto-field').value = Math.round(row.brutto * 100) / 100;
+    document.getElementById('netto-field').value = netto_val;
+    document.getElementById('brutto-field').value = brutto_val;
+    console.log('licz() ustawił:', {format:sel.format, gramatura:sel.gramatura, naklad:sel.naklad, netto:netto_val, brutto:brutto_val});
   }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
