@@ -283,7 +283,11 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
       b.classList.add('on');
       var g = group.dataset.group;
-      sel[g] = b.dataset.val;
+      if(g==='naklad'){
+        sel.naklad = b.dataset.val;
+      } else {
+        sel[g] = b.dataset.val;
+      }
       licz();
     });
   });
