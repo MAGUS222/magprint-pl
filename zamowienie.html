@@ -144,30 +144,26 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
 
 <script>
 (function(){
-  // Parsuj URL ręcznie - prostsza, bardziej niezawodna metoda
-  function getParam(name){
-    var regex = new RegExp('[?&]' + name + '=([^&]*)');
-    var result = regex.exec(window.location.search);
-    return result ? decodeURIComponent(result[1]) : '';
-  }
-
   var produkty = {
     'ulotki': 'Ulotki reklamowe',
     'teczki': 'Teczki ofertowe',
     'torby': 'Torby reklamowe'
   };
-  var produkt = getParam('produkt') || 'ulotki';
+
+  // Czytaj parametry z URL
+  var params = new URLSearchParams(window.location.search);
+  var produkt = params.get('produkt') || 'ulotki';
   var nazwa = produkty[produkt] || 'Produkt';
 
   document.getElementById('produkt-info').textContent = nazwa;
   document.getElementById('produkt-field').value = nazwa;
 
-  // Jeśli są dane z kalkulatora — wyświetl je
-  var wariant = getParam('wariant');
-  var naklad = getParam('naklad');
-  var opcje = getParam('opcje');
-  var netto = getParam('netto');
-  var brutto = getParam('brutto');
+  // Dane z kalkulatora
+  var wariant = params.get('wariant');
+  var naklad = params.get('naklad');
+  var opcje = params.get('opcje');
+  var netto = params.get('netto');
+  var brutto = params.get('brutto');
 
   if(naklad){
     var summaryBox = document.getElementById('summary-data');

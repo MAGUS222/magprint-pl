@@ -196,16 +196,13 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <div class="net" id="net">—</div>
           <div class="br" id="br">—</div>
           <div class="per" id="per">—</div>
-          <form method="POST" action="https://formsubmit.co/biuro@magprint.pl" style="width:100%;margin-top:22px">
-            <input type="hidden" name="_subject" value="📋 Nowe zamówienie teczki — magprint.pl">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://magprint.pl/teczki-ofertowe?zamowiono=1">
-            <input type="hidden" name="Typ" value="Teczki ofertowe">
-            <input type="hidden" name="Wariant" id="wariant-field" value="1-bigowa">
-            <input type="hidden" name="Nakład" id="naklad-field" value="100 szt">
-            <input type="hidden" name="Uszlachetnianie" id="opcje-field" value="brak">
-            <input type="hidden" name="Cena netto" id="netto-field" value="">
-            <input type="hidden" name="Cena brutto" id="brutto-field" value="">
+          <form method="GET" action="/zamowienie" style="width:100%;margin-top:22px">
+            <input type="hidden" name="produkt" value="teczki">
+            <input type="hidden" name="wariant" id="wariant-field" value="1big">
+            <input type="hidden" name="naklad" id="naklad-field" value="100">
+            <input type="hidden" name="opcje" id="opcje-field" value="">
+            <input type="hidden" name="netto" id="netto-field" value="">
+            <input type="hidden" name="brutto" id="brutto-field" value="">
             <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
           </form>
           <a href="/kontakt" class="btn btn-ghost" style="width:100%;margin-top:10px;border:1px solid var(--line)">Wyślij zapytanie ofertowe</a>
