@@ -250,7 +250,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <div class="net" id="net">—</div>
           <div class="br" id="br">—</div>
           <div class="per" id="per">—</div>
-          <a href="/zamowienie?produkt=torby" class="btn btn-primary" style="width:100%;margin-top:22px">Dodaj do zamówienia</a>
+          <button type="button" id="dodaj-btn" class="btn btn-primary" style="width:100%;margin-top:22px">Dodaj do zamówienia</button>
         </div>
       </div>
 
@@ -420,6 +420,25 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       licz();
     });
   });
+
+  // Przycisk "Dodaj do zamówienia"
+  document.getElementById('dodaj-btn').addEventListener('click', function(){
+    var tab = CENY[sel.rozmiar];
+    if(!tab) {
+      alert('Rozmiar A6 wymaga wyceny indywidualnej — skontaktuj się z nami');
+      return;
+    }
+    var brutto = tab[sel.szt];
+    var netto = brutto / (1 + VAT);
+
+    var url = '/zamowienie?produkt=torby' +
+      '&rozmiar=' + sel.rozmiar +
+      '&naklad=' + sel.szt +
+      '&netto=' + Math.round(netto * 100) / 100 +
+      '&brutto=' + Math.round(brutto * 100) / 100;
+    window.location.href = url;
+  });
+
   licz();
 })();
 </script>

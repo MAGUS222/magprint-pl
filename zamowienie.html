@@ -167,33 +167,52 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     var summaryBox = document.getElementById('summary-data');
     summaryBox.style.display = 'block';
 
-    // Wyświetl dane
-    var wariantNazwa = wariant === '1big' ? 'Teczka 1-bigowa' : 'Teczka 2-bigowa';
-    document.getElementById('wariant-info').textContent = wariantNazwa;
-    document.getElementById('naklad-info').textContent = naklad + ' szt.';
+    function fmt(n){ return parseFloat(n).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
 
-    // Opcje uszlachetniania
-    var opcjeNazwy = {
-      'blyszcz': 'Folia błyszcząca',
-      'matowa': 'Folia matowa',
-      'softtouch': 'Folia soft touche',
-      'lakier': 'Lakier miejscowy'
-    };
-    if(opcje){
-      var opcjeList = opcje.split(',').map(function(o){ return opcjeNazwy[o] || o; }).join(', ');
-      document.getElementById('opcje-info').textContent = opcjeList;
-    } else {
+    // Konstruuj dane w zależności od produktu
+    var szczegoly = '';
+    if(produkt === 'teczki'){
+      var wariantNazwa = wariant === '1big' ? 'Teczka 1-bigowa' : 'Teczka 2-bigowa';
+      document.getElementById('wariant-info').textContent = wariantNazwa;
+      document.getElementById('naklad-info').textContent = naklad + ' szt.';
+
+      var opcjeNazwy = {
+        'blyszcz': 'Folia błyszcząca',
+        'matowa': 'Folia matowa',
+        'softtouch': 'Folia soft touche',
+        'lakier': 'Lakier miejscowy'
+      };
+      if(opcje){
+        var opcjeList = opcje.split(',').map(function(o){ return opcjeNazwy[o] || o; }).join(', ');
+        document.getElementById('opcje-info').textContent = opcjeList;
+      } else {
+        document.getElementById('opcje-info').textContent = 'Brak';
+      }
+
+      szczegoly = wariantNazwa + ', nakład ' + naklad + ' szt.';
+      if(opcje) szczegoly += ', ' + document.getElementById('opcje-info').textContent;
+    } else if(produkt === 'ulotki'){
+      var format = params.get('format');
+      var gramatura = params.get('gramatura');
+      document.getElementById('wariant-info').textContent = 'Format ' + format + ', papier ' + gramatura;
+      document.getElementById('wariant-info').parentElement.querySelector('.lab').textContent = 'Specyfikacja';
+      document.getElementById('naklad-info').textContent = naklad + ' szt.';
       document.getElementById('opcje-info').textContent = 'Brak';
+
+      szczegoly = 'Ulotki ' + format + ', papier ' + gramatura + ', nakład ' + naklad + ' szt.';
+    } else if(produkt === 'torby'){
+      var rozmiar = params.get('rozmiar');
+      document.getElementById('wariant-info').textContent = 'Rozmiar ' + rozmiar;
+      document.getElementById('wariant-info').parentElement.querySelector('.lab').textContent = 'Specyfikacja';
+      document.getElementById('naklad-info').textContent = naklad + ' szt.';
+      document.getElementById('opcje-info').textContent = 'Brak';
+
+      szczegoly = 'Torby reklamowe ' + rozmiar + ', nakład ' + naklad + ' szt.';
     }
 
-    // Ceny
-    function fmt(n){ return parseFloat(n).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
     document.getElementById('netto-info').textContent = fmt(netto);
     document.getElementById('brutto-info').textContent = fmt(brutto);
 
-    // Wypełnij pole szczegóły
-    var szczegoly = wariantNazwa + ', nakład ' + naklad + ' szt.';
-    if(opcje) szczegoly += ', ' + document.getElementById('opcje-info').textContent;
     szczegoly += ', wycena netto: ' + fmt(netto) + ', brutto: ' + fmt(brutto);
     document.getElementById('szczegoly').value = szczegoly;
   }
