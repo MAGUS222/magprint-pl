@@ -250,12 +250,15 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <div class="net" id="net">—</div>
           <div class="br" id="br">—</div>
           <div class="per" id="per">—</div>
-          <form method="GET" action="/zamowienie" style="width:100%;margin-top:22px">
-            <input type="hidden" name="produkt" value="torby">
-            <input type="hidden" name="rozmiar" id="rozmiar-field" value="A5">
-            <input type="hidden" name="naklad" id="naklad-field" value="100">
-            <input type="hidden" name="netto" id="netto-field" value="">
-            <input type="hidden" name="brutto" id="brutto-field" value="">
+          <form method="POST" action="https://formsubmit.co/biuro@magprint.pl" style="width:100%;margin-top:22px">
+            <input type="hidden" name="_subject" value="📋 Nowe zamówienie torby — magprint.pl">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://magprint.pl/torby-reklamowe?zamowiono=1">
+            <input type="hidden" name="Typ" value="Torby reklamowe">
+            <input type="hidden" name="Rozmiar" id="rozmiar-field" value="A5">
+            <input type="hidden" name="Nakład" id="naklad-field" value="100 szt">
+            <input type="hidden" name="Cena netto" id="netto-field" value="">
+            <input type="hidden" name="Cena brutto" id="brutto-field" value="">
             <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
           </form>
         </div>
