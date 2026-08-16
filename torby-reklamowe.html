@@ -422,9 +422,10 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     var netto_rounded = Math.round(netto * 100) / 100;
     var brutto_rounded = Math.round(brutto * 100) / 100;
     document.getElementById('rozmiar-field').value = sel.rozmiar;
-    document.getElementById('naklad-field').value = String(sel.szt);
-    document.getElementById('netto-field').value = String(netto_rounded);
-    document.getElementById('brutto-field').value = String(brutto_rounded);
+    document.getElementById('naklad-field').value = sel.szt;
+    document.getElementById('netto-field').value = netto_rounded;
+    document.getElementById('brutto-field').value = brutto_rounded;
+    console.log('licz() called - rozmiar:', sel.rozmiar, 'netto:', netto_rounded, 'brutto:', brutto_rounded, 'szt:', sel.szt);
   }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
