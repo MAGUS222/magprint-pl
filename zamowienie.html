@@ -67,11 +67,32 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
 
   <div class="grid">
     <div class="card">
-      <h3 style="font-family:'Fraunces',serif;font-size:18px;margin-bottom:16px">Twoje zamówienie</h3>
+      <h3 style="font-family:'Fraunces',serif;font-size:18px;margin-bottom:16px">Podsumowanie zamówienia</h3>
 
-      <div style="background:#f0ebe3;border:1px solid var(--line);border-radius:3px;padding:16px;margin-bottom:20px">
-        <p style="font-size:14px;color:var(--muted);margin-bottom:8px"><b>Produkt:</b></p>
-        <p id="produkt-info" style="font-size:15px">Ulotki reklamowe</p>
+      <div id="summary-box" style="background:#f0ebe3;border:1px solid var(--line);border-radius:3px;padding:16px;margin-bottom:20px">
+        <div style="margin-bottom:12px">
+          <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px"><b>Produkt</b></p>
+          <p id="produkt-info" style="font-size:15px">Ulotki reklamowe</p>
+        </div>
+        <div id="summary-data" style="display:none">
+          <div style="margin-bottom:8px">
+            <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px"><b>Wariant</b></p>
+            <p id="wariant-info" style="font-size:14px">—</p>
+          </div>
+          <div style="margin-bottom:8px">
+            <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px"><b>Nakład</b></p>
+            <p id="naklad-info" style="font-size:14px">—</p>
+          </div>
+          <div style="margin-bottom:8px">
+            <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px"><b>Opcje</b></p>
+            <p id="opcje-info" style="font-size:14px">—</p>
+          </div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,.1)">
+            <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px"><b>Wycena</b></p>
+            <p style="font-size:13px;color:var(--muted)">Netto: <span id="netto-info" style="font-weight:600">—</span></p>
+            <p style="font-size:13px;color:var(--muted)">Brutto: <span id="brutto-info" style="font-weight:600">—</span></p>
+          </div>
+        </div>
       </div>
 
       <p style="color:var(--muted);font-size:14px">
@@ -131,8 +152,51 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
   };
   var produkt = params.get('produkt') || 'ulotki';
   var nazwa = produkty[produkt] || 'Produkt';
+
   document.getElementById('produkt-info').textContent = nazwa;
   document.getElementById('produkt-field').value = nazwa;
+
+  // Jeśli są dane z kalkulatora — wyświetl je
+  var wariant = params.get('wariant');
+  var naklad = params.get('naklad');
+  var opcje = params.get('opcje');
+  var netto = params.get('netto');
+  var brutto = params.get('brutto');
+
+  if(naklad){
+    var summaryBox = document.getElementById('summary-data');
+    summaryBox.style.display = 'block';
+
+    // Wyświetl dane
+    var wariantNazwa = wariant === '1big' ? 'Teczka 1-bigowa' : 'Teczka 2-bigowa';
+    document.getElementById('wariant-info').textContent = wariantNazwa;
+    document.getElementById('naklad-info').textContent = naklad + ' szt.';
+
+    // Opcje uszlachetniania
+    var opcjeNazwy = {
+      'blyszcz': 'Folia błyszcząca',
+      'matowa': 'Folia matowa',
+      'softtouch': 'Folia soft touche',
+      'lakier': 'Lakier miejscowy'
+    };
+    if(opcje){
+      var opcjeList = opcje.split(',').map(function(o){ return opcjeNazwy[o] || o; }).join(', ');
+      document.getElementById('opcje-info').textContent = opcjeList;
+    } else {
+      document.getElementById('opcje-info').textContent = 'Brak';
+    }
+
+    // Ceny
+    function fmt(n){ return parseFloat(n).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
+    document.getElementById('netto-info').textContent = fmt(netto);
+    document.getElementById('brutto-info').textContent = fmt(brutto);
+
+    // Wypełnij pole szczegóły
+    var szczegoly = wariantNazwa + ', nakład ' + naklad + ' szt.';
+    if(opcje) szczegoly += ', ' + document.getElementById('opcje-info').textContent;
+    szczegoly += ', wycena netto: ' + fmt(netto) + ', brutto: ' + fmt(brutto);
+    document.getElementById('szczegoly').value = szczegoly;
+  }
 })();
 </script>
 </body>
