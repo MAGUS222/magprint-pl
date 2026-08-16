@@ -253,9 +253,9 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <form method="GET" action="/zamowienie" style="width:100%;margin-top:22px">
             <input type="hidden" name="produkt" value="torby">
             <input type="hidden" name="rozmiar" id="rozmiar-field" value="A5">
-            <input type="hidden" name="naklad" id="naklad-field" value="">
-            <input type="hidden" name="netto" id="netto-field" value="">
-            <input type="hidden" name="brutto" id="brutto-field" value="">
+            <input type="hidden" name="naklad" id="naklad-field" value="100">
+            <input type="hidden" name="netto" id="netto-field" value="989.22">
+            <input type="hidden" name="brutto" id="brutto-field" value="1112.66">
             <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
           </form>
         </div>
@@ -434,7 +434,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       b.classList.add('on');
       var g = group.dataset.group;
       if(g==='rozmiar'){ sel.rozmiar = b.dataset.val; }
-      if(g==='naklad'){ sel.szt = parseInt(b.dataset.val,10); }
+      if(g==='naklad'){ sel.szt = parseInt(b.dataset.val, 10); }
       licz();
     });
   });
