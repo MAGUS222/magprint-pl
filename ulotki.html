@@ -192,13 +192,15 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <div class="net" id="net">—</div>
           <div class="br" id="br">—</div>
           <div class="per" id="per">—</div>
-          <form method="GET" action="/zamowienie" style="width:100%;margin-top:22px">
+          <form method="GET" action="/zamowienie" id="order-form" style="width:100%;margin-top:22px">
             <input type="hidden" name="produkt" value="ulotki">
-            <input type="hidden" name="format" id="format-field" value="A5">
-            <input type="hidden" name="gramatura" id="gramatura-field" value="170">
-            <input type="hidden" name="naklad" id="naklad-field" value="1000">
-            <input type="hidden" name="netto" id="netto-field" value="218.17">
-            <input type="hidden" name="brutto" id="brutto-field" value="268.35">
+            <input type="hidden" name="spec" id="f-spec" value="Format A5, papier 170 g">
+            <input type="hidden" name="format" id="f-format" value="A5">
+            <input type="hidden" name="gramatura" id="f-gramatura" value="170">
+            <input type="hidden" name="naklad" id="f-naklad" value="1000">
+            <input type="hidden" name="opcje" id="f-opcje" value="">
+            <input type="hidden" name="netto" id="f-netto" value="218.17">
+            <input type="hidden" name="brutto" id="f-brutto" value="268.35">
             <button type="submit" class="btn btn-primary" style="width:100%">Dodaj do zamówienia</button>
           </form>
           <a href="/kontakt" class="btn btn-ghost" style="width:100%;margin-top:10px;border:1px solid var(--line)">Wyślij zapytanie ofertowe</a>
@@ -285,12 +287,15 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     br.textContent = fmt(row.brutto) + ' brutto';
     var szt = parseInt(sel.naklad, 10);
     per.textContent = fmt(row.brutto/szt) + ' / szt. brutto · ' + szt.toLocaleString('pl-PL') + ' szt.';
-    document.getElementById('format-field').value = sel.format;
-    document.getElementById('gramatura-field').value = sel.gramatura;
-    document.getElementById('naklad-field').value = sel.naklad;
-    document.getElementById('netto-field').value = Math.round(row.netto * 100) / 100;
-    document.getElementById('brutto-field').value = Math.round(row.brutto * 100) / 100;
+    set('f-spec', 'Format ' + sel.format + ', papier ' + sel.gramatura + ' g');
+    set('f-format', sel.format);
+    set('f-gramatura', sel.gramatura);
+    set('f-naklad', sel.naklad);
+    set('f-opcje', '');
+    set('f-netto', (Math.round(row.netto * 100) / 100).toFixed(2));
+    set('f-brutto', (Math.round(row.brutto * 100) / 100).toFixed(2));
   }
+  function set(id, val){ var el = document.getElementById(id); if(el) el.value = val; }
   document.querySelectorAll('.opts').forEach(function(group){
     group.addEventListener('click', function(e){
       var b = e.target.closest('.chip'); if(!b) return;
@@ -301,6 +306,10 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       licz();
     });
   });
+  // Zabezpieczenie: przelicz jeszcze raz tuż przed wysłaniem formularza,
+  // żeby pola ukryte nigdy nie były rozjechane ze stanem kalkulatora.
+  var of = document.getElementById('order-form');
+  if(of) of.addEventListener('submit', function(){ licz(); });
   licz();
 })();
 </script>

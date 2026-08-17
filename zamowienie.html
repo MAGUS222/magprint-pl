@@ -116,6 +116,11 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
       <input type="hidden" name="_next" value="https://magprint.pl/zamowienie?wyslano=1">
       <input type="hidden" name="Zrodlo" value="Strona zamówienia">
       <input type="hidden" id="produkt-field" name="Produkt" value="Ulotki">
+      <input type="hidden" id="spec-field" name="Specyfikacja" value="">
+      <input type="hidden" id="naklad-field" name="Nakład" value="">
+      <input type="hidden" id="opcje-field" name="Uszlachetnianie" value="">
+      <input type="hidden" id="netto-field" name="Wycena netto" value="">
+      <input type="hidden" id="brutto-field" name="Wycena brutto" value="">
 
       <label for="imie">Imię i nazwisko</label>
       <input id="imie" name="Imię i nazwisko" type="text" required>
@@ -147,75 +152,101 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
   var produkty = {
     'ulotki': 'Ulotki reklamowe',
     'teczki': 'Teczki ofertowe',
-    'torby': 'Torby reklamowe'
+    'torby':  'Torby reklamowe'
+  };
+  // Czytelne nazwy opcji — obsługa również starych linków, gdzie przychodziły kody
+  var OPCJE_NAZWY = {
+    'blyszcz':  'Folia błyszcząca',
+    'matowa':   'Folia matowa',
+    'softtouch':'Folia soft touche',
+    'lakier':   'Lakier miejscowy'
   };
 
-  // Czytaj parametry z URL
-  var params = new URLSearchParams(window.location.search);
-  var produkt = params.get('produkt') || 'ulotki';
-  var nazwa = produkty[produkt] || 'Produkt';
-
-  document.getElementById('produkt-info').textContent = nazwa;
-  document.getElementById('produkt-field').value = nazwa;
-
-  // Dane z kalkulatora
-  var wariant = params.get('wariant');
-  var naklad = params.get('naklad');
-  var opcje = params.get('opcje');
-  var netto = params.get('netto');
-  var brutto = params.get('brutto');
-
-  if(naklad){
-    var summaryBox = document.getElementById('summary-data');
-    summaryBox.style.display = 'block';
-
-    function fmt(n){ return parseFloat(n).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
-
-    // Konstruuj dane w zależności od produktu
-    var szczegoly = '';
-    if(produkt === 'teczki'){
-      var wariantNazwa = wariant === '1big' ? 'Teczka 1-bigowa' : 'Teczka 2-bigowa';
-      document.getElementById('wariant-info').textContent = wariantNazwa;
-      document.getElementById('naklad-info').textContent = naklad + ' szt.';
-
-      var opcjeNazwy = {
-        'blyszcz': 'Folia błyszcząca',
-        'matowa': 'Folia matowa',
-        'softtouch': 'Folia soft touche',
-        'lakier': 'Lakier miejscowy'
-      };
-      if(opcje){
-        var opcjeList = opcje.split(',').map(function(o){ return opcjeNazwy[o] || o; }).join(', ');
-        document.getElementById('opcje-info').textContent = opcjeList;
-      } else {
-        document.getElementById('opcje-info').textContent = 'Brak';
-      }
-
-      szczegoly = wariantNazwa + ', nakład ' + naklad + ' szt.';
-      if(opcje) szczegoly += ', ' + document.getElementById('opcje-info').textContent;
-    } else if(produkt === 'ulotki'){
-      var format = params.get('format');
-      var gramatura = params.get('gramatura');
-      document.getElementById('wariant-info').textContent = 'Format ' + format + ', papier ' + gramatura;
-      document.getElementById('naklad-info').textContent = naklad + ' szt.';
-      document.getElementById('opcje-info').textContent = 'Brak';
-
-      szczegoly = 'Ulotki ' + format + ', papier ' + gramatura + ', nakład ' + naklad + ' szt.';
-    } else if(produkt === 'torby'){
-      var rozmiar = params.get('rozmiar');
-      document.getElementById('wariant-info').textContent = 'Rozmiar ' + rozmiar;
-      document.getElementById('naklad-info').textContent = naklad + ' szt.';
-      document.getElementById('opcje-info').textContent = 'Brak';
-
-      szczegoly = 'Torby reklamowe ' + rozmiar + ', nakład ' + naklad + ' szt.';
-    }
-
-    document.getElementById('netto-info').textContent = fmt(netto);
-    document.getElementById('brutto-info').textContent = fmt(brutto);
-
-    szczegoly += ', wycena netto: ' + fmt(netto) + ', brutto: ' + fmt(brutto);
-    document.getElementById('szczegoly').value = szczegoly;
+  function $(id){ return document.getElementById(id); }
+  function setVal(id, v){ var el=$(id); if(el) el.value = v; }
+  function setTxt(id, v){ var el=$(id); if(el) el.textContent = v; }
+  function fmt(n){
+    var x = parseFloat(n);
+    if(isNaN(x)) return null;
+    return x.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł';
   }
+
+  var params  = new URLSearchParams(window.location.search);
+  var produkt = params.get('produkt') || '';
+  var nazwa   = produkty[produkt] || 'Produkt';
+
+  setTxt('produkt-info', nazwa);
+  setVal('produkt-field', nazwa);
+
+  var naklad = params.get('naklad');
+  var netto  = params.get('netto');
+  var brutto = params.get('brutto');
+  var opcje  = params.get('opcje') || '';
+  var spec   = params.get('spec') || '';
+
+  // Fallback dla starych linków bez parametru "spec"
+  if(!spec){
+    if(produkt === 'ulotki' && params.get('format')){
+      spec = 'Format ' + params.get('format') + ', papier ' + params.get('gramatura') + ' g';
+    } else if(produkt === 'torby' && params.get('rozmiar')){
+      spec = 'Rozmiar ' + params.get('rozmiar');
+    } else if(produkt === 'teczki' && params.get('wariant')){
+      spec = params.get('wariant') === '1big' ? 'Teczka 1-bigowa' : 'Teczka 2-bigowa';
+    }
+  }
+  // Zamień kody opcji na nazwy (stare linki)
+  if(opcje){
+    opcje = opcje.split(',').map(function(o){
+      o = o.trim();
+      return OPCJE_NAZWY[o] || o;
+    }).filter(Boolean).join(', ');
+  }
+
+  // Nic nie przyszło z kalkulatora — pokaż podpowiedź zamiast pustych myślników
+  if(!naklad && !spec){
+    setTxt('produkt-info', nazwa === 'Produkt' ? 'Nie wybrano produktu' : nazwa);
+    var box = $('summary-box');
+    if(box){
+      var hint = document.createElement('p');
+      hint.style.cssText = 'font-size:13px;color:#8f6f4c;margin-top:10px';
+      hint.innerHTML = 'Nie przekazano parametrów z kalkulatora. Wróć do wyceny: ' +
+        '<a href="/ulotki#kalkulator" style="text-decoration:underline">ulotki</a>, ' +
+        '<a href="/teczki-ofertowe#kalkulator" style="text-decoration:underline">teczki</a>, ' +
+        '<a href="/torby-reklamowe#kalkulator" style="text-decoration:underline">torby</a>. ' +
+        'Możesz też opisać zamówienie w formularzu obok.';
+      box.appendChild(hint);
+    }
+    return;
+  }
+
+  $('summary-data').style.display = 'block';
+
+  var nakladTxt = naklad ? Number(naklad).toLocaleString('pl-PL') + ' szt.' : '—';
+  var nettoTxt  = fmt(netto);
+  var bruttoTxt = fmt(brutto);
+
+  setTxt('wariant-info', spec || '—');
+  setTxt('naklad-info',  nakladTxt);
+  setTxt('opcje-info',   opcje || 'Brak');
+  setTxt('netto-info',   nettoTxt  || 'wycena indywidualna');
+  setTxt('brutto-info',  bruttoTxt || 'wycena indywidualna');
+
+  // Pola strukturalne do maila
+  setVal('spec-field',   spec);
+  setVal('naklad-field', nakladTxt);
+  setVal('opcje-field',  opcje || 'Brak');
+  setVal('netto-field',  nettoTxt  || 'wycena indywidualna');
+  setVal('brutto-field', bruttoTxt || 'wycena indywidualna');
+
+  // Czytelne podsumowanie w treści wiadomości
+  var czesci = [nazwa];
+  if(spec)   czesci.push(spec);
+  if(naklad) czesci.push('nakład ' + nakladTxt);
+  if(opcje)  czesci.push(opcje);
+  czesci.push(nettoTxt && bruttoTxt
+    ? 'wycena: ' + nettoTxt + ' netto / ' + bruttoTxt + ' brutto'
+    : 'wycena indywidualna (do potwierdzenia)');
+  $('szczegoly').value = czesci.join(', ') + '.';
 })();
 </script>
 </body>
