@@ -145,7 +145,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
   </div>
 </main>
 
-<footer>© 2026 magprint.pl</footer>
+<footer>© 2026 magprint.pl <span style="opacity:.45">· v3 · 2026-08-17</span></footer>
 
 <script>
 (function(){
@@ -162,6 +162,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     'lakier':   'Lakier miejscowy'
   };
 
+  var BUILD = 'v3 · 2026-08-17';
   function $(id){ return document.getElementById(id); }
   function setVal(id, v){ var el=$(id); if(el) el.value = v; }
   function setTxt(id, v){ var el=$(id); if(el) el.textContent = v; }
@@ -202,8 +203,31 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     }).filter(Boolean).join(', ');
   }
 
+  // ---- SAMODIAGNOSTYKA ----------------------------------------------------
+  // Pokazuje dokładnie to, co dotarło z kalkulatora. Widoczne tylko wtedy, gdy
+  // czegoś brakuje albo gdy do adresu dopiszesz &debug=1. Klient tego nie widzi,
+  // dopóki wszystko działa.
+  function diagnostyka(powod){
+    var box = $('summary-box');
+    if(!box) return;
+    var d = document.createElement('div');
+    d.style.cssText = 'margin-top:14px;padding:12px;border:1px solid #d9c4a4;background:#fffaf2;'+
+                      'border-radius:3px;font-size:12px;color:#6b5a45;font-family:ui-monospace,monospace;'+
+                      'word-break:break-all;line-height:1.5';
+    var lista = [];
+    params.forEach(function(v,k){ lista.push(k+' = '+(v===''?'(puste)':v)); });
+    d.innerHTML = '<b>🔎 Dane techniczne ('+powod+')</b><br>' +
+                  'BUILD: ' + BUILD + '<br>' +
+                  'Adres: ' + (window.location.search || '(brak parametrów)') + '<br>' +
+                  (lista.length ? 'Odebrane pola:<br>• ' + lista.join('<br>• ')
+                                : 'Nie odebrano żadnych pól.') +
+                  '<br><br>Prześlij ten fragment, jeśli zamówienie wygląda niepoprawnie.';
+    box.appendChild(d);
+  }
+
   // Nic nie przyszło z kalkulatora — pokaż podpowiedź zamiast pustych myślników
   if(!naklad && !spec){
+    diagnostyka('brak danych z kalkulatora');
     setTxt('produkt-info', nazwa === 'Produkt' ? 'Nie wybrano produktu' : nazwa);
     var box = $('summary-box');
     if(box){
@@ -247,6 +271,20 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     ? 'wycena: ' + nettoTxt + ' netto / ' + bruttoTxt + ' brutto'
     : 'wycena indywidualna (do potwierdzenia)');
   $('szczegoly').value = czesci.join(', ') + '.';
+
+  // Diagnostyka: pokaż się, gdy czegoś brakuje albo na żądanie (&debug=1)
+  var braki = [];
+  if(!spec)   braki.push('spec');
+  if(!naklad) braki.push('naklad');
+  if(!netto)  braki.push('netto');
+  if(!brutto) braki.push('brutto');
+  // przy "wycenie indywidualnej" brak ceny jest zamierzony — nie alarmuj
+  var cenaCelowoPusta = (produkt === 'torby' && params.get('rozmiar') === 'A6');
+  if(params.get('debug') === '1'){
+    diagnostyka('tryb debug');
+  } else if(braki.length && !(cenaCelowoPusta && braki.join()==='netto,brutto')){
+    diagnostyka('brakujące pola: ' + braki.join(', '));
+  }
 })();
 </script>
 </body>
