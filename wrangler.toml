@@ -1,0 +1,16 @@
+name = "magprint-pl"
+type = "javascript"
+account_id = "447edbfad240cf781f5b43b20c8f4ed5"
+pages_build_output_dir = ""
+
+[build]
+command = "echo 'Static site — no build needed'"
+cwd = ""
+watch_paths = []
+
+[env.production]
+name = "magprint-pl"
+routes = [
+  { pattern = "magprint.pl", zone_id = "" },
+  { pattern = "*.magprint.pl", zone_id = "" }
+]
