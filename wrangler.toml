@@ -1,8 +1,0 @@
-name = "magprint-pl"
-type = "javascript"
-account_id = "447edbfad240cf781f5b43b20c8f4ed5"
-
-[build]
-command = ""
-cwd = ""
-watch_paths = []
