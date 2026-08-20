@@ -86,15 +86,20 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
       <input id="email" name="E-mail" type="email" required>
       <label for="temat">Czego dotyczy zapytanie</label>
       <select id="temat" name="Temat">
-        <option>Wycena ulotek</option>
-        <option>Wycena teczek ofertowych</option>
-        <option>Wycena toreb reklamowych</option>
-        <option>Produkt spoza oferty</option>
-        <option>Inne</option>
+        <option value="Pytanie ogólne">Pytanie ogólne</option>
+        <option value="Przygotowanie projektu">Przygotowanie projektu do druku</option>
+        <option value="Wycena ulotek">Wycena ulotek</option>
+        <option value="Wycena wizytówek">Wycena wizytówek</option>
+        <option value="Wycena katalogów">Wycena katalogów</option>
+        <option value="Wycena teczek ofertowych">Wycena teczek ofertowych</option>
+        <option value="Wycena toreb reklamowych">Wycena toreb reklamowych</option>
+        <option value="Wycena toreb na prezenty">Wycena toreb na prezenty</option>
+        <option value="Produkt spoza oferty">Produkt spoza oferty</option>
+        <option value="Inne">Inne</option>
       </select>
       <label for="wiadomosc">Wiadomość</label>
       <textarea id="wiadomosc" name="Wiadomość" required></textarea>
-      <label for="plik">Dołącz plik projektu (opcjonalnie)</label>
+      <label for="plik">Dołącz materiały (opcjonalnie)</label>
       <input id="plik" name="Plik" type="file" accept=".pdf,.ai,.psd,.jpg,.png,.zip">
       <button type="submit" class="btn">Wyślij zapytanie</button>
     </form>
@@ -102,5 +107,64 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
 </main>
 
 <footer>© 2026 magprint.pl <span style="opacity:.45">· v3 · 2026-08-17</span></footer>
+
+<script>
+(function(){
+  // Wstępne uzupełnienie formularza na podstawie adresu, np. /kontakt?projekt=ulotki
+  var PRODUKTY = {
+    'ulotki':           { temat:'Wycena ulotek',              nazwa:'ulotek' },
+    'wizytowki':        { temat:'Wycena wizytówek',           nazwa:'wizytówek' },
+    'katalogi':         { temat:'Wycena katalogów',           nazwa:'katalogu' },
+    'teczki':           { temat:'Wycena teczek ofertowych',   nazwa:'teczki ofertowej' },
+    'torby':            { temat:'Wycena toreb reklamowych',   nazwa:'torby reklamowej' },
+    'torby-prezentowe': { temat:'Wycena toreb na prezenty',   nazwa:'torby na prezenty' }
+  };
+
+  var params  = new URLSearchParams(window.location.search);
+  var projekt = params.get('projekt');
+  var p       = PRODUKTY[projekt];
+
+  // Potwierdzenie po wysłaniu formularza
+  if(params.get('wyslano') === '1'){
+    var main = document.querySelector('main');
+    var box  = document.createElement('div');
+    box.style.cssText = 'background:#f2f7f2;border:1px solid #cfe0cf;border-radius:3px;padding:18px 20px;margin-bottom:32px;font-size:15px';
+    box.innerHTML = '<b>Wiadomość wysłana.</b> Odpowiadamy zwykle w ciągu jednego dnia roboczego, ' +
+                    'w godzinach pon–pt 9:00–15:00. Jeśli sprawa jest pilna, zadzwoń: ' +
+                    '<a href="tel:+48570001316" style="color:#8f6f4c;text-decoration:underline">570 001 316</a>.';
+    main.insertBefore(box, main.querySelector('.grid'));
+  }
+
+  if(!p) return;
+
+  // Temat
+  var temat = document.getElementById('temat');
+  if(temat){
+    var docelowy = params.get('tryb') === 'projekt' ? 'Przygotowanie projektu' : p.temat;
+    for(var i = 0; i < temat.options.length; i++){
+      if(temat.options[i].value === docelowy){ temat.selectedIndex = i; break; }
+    }
+  }
+
+  // Treść wiadomości
+  var msg = document.getElementById('wiadomosc');
+  if(msg && !msg.value){
+    if(params.get('tryb') === 'projekt'){
+      msg.value = 'Dzień dobry,\n\npotrzebuję pomocy w przygotowaniu projektu ' + p.nazwa + ' do druku.\n\n'
+                + 'Co mam: (np. samo logo / gotowy projekt do poprawy / nic, potrzebuję projektu od zera)\n'
+                + 'Nakład: \n'
+                + 'Termin: \n\n'
+                + 'Proszę o kontakt i wycenę.';
+      var lead = document.querySelector('.lead');
+      if(lead) lead.textContent = 'Nie masz gotowego pliku do druku? Napisz, czym dysponujesz, a odezwiemy się '
+                                + 'z propozycją i wyceną przygotowania projektu. Odpowiadamy w ciągu jednego dnia roboczego.';
+    } else {
+      msg.value = 'Dzień dobry,\n\nproszę o wycenę ' + p.nazwa + '.\n\nNakład: \nTermin: \n\nSzczegóły: ';
+    }
+    // kursor na końcu, bez przewijania strony
+    msg.setSelectionRange(msg.value.length, msg.value.length);
+  }
+})();
+</script>
 </body>
 </html>

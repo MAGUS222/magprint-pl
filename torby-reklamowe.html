@@ -134,13 +134,7 @@ h2.sec{font-size:38px;margin-bottom:14px}
 @media(max-width:820px){.galeria{grid-template-columns:1fr 1fr}}
 .gal{aspect-ratio:4/5;border-radius:3px;background:linear-gradient(150deg,var(--paper),var(--paper2));border:1px solid var(--line);display:flex;align-items:end;padding:18px;color:#8a7c68;font-size:13px}
 
-/* opinie */
-.opinie{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:820px){.opinie{grid-template-columns:1fr}}
-.opinia{background:#fff;border:1px solid var(--line);border-radius:3px;padding:30px}
-.opinia .stars{color:var(--gold);letter-spacing:2px}
-.opinia p{font-family:'Fraunces',serif;font-size:19px;line-height:1.5;margin:16px 0}
-.opinia .aut{font-size:13px;color:var(--muted);letter-spacing:.04em}
+/* risk reversal */
 .reversal{margin-top:32px;font-size:16px;color:var(--muted)}
 .reversal b{color:var(--ink);font-weight:600}
 
@@ -149,6 +143,7 @@ h2.sec{font-size:38px;margin-bottom:14px}
 .tresc p{font-size:16px;color:var(--muted);margin-bottom:16px;line-height:1.75}
 .tresc p strong{color:var(--ink);font-weight:600}
 .tresc a{color:var(--gold-d);text-decoration:underline}
+.tresc a.btn{color:#fff;text-decoration:none}
 .tresc p:last-child{margin-bottom:0}
 
 /* FAQ */
@@ -283,7 +278,9 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
         </ul>
         <p style="font-size:14px;color:var(--muted);margin-top:22px">
           A6 pionowa oraz nakłady powyżej 2000 szt. — wycena indywidualna.
-          <a href="/kontakt" style="color:var(--gold-d);text-decoration:underline">Napisz do nas</a>.
+          <a href="/kontakt" style="color:var(--gold-d);text-decoration:underline">Napisz do nas</a>.<br><br>
+          Szukasz torby na upominek, z matowego papieru i z logo w jednym kolorze?
+          Zobacz <a href="/torby-prezentowe" style="color:var(--gold-d);text-decoration:underline">torby na prezenty</a> — już od 344,71 zł za 100 sztuk.
         </p>
       </div>
     </div>
@@ -360,7 +357,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       <p><strong>Rozdzielczość 300 dpi.</strong> Grafika pobrana ze strony internetowej ma zwykle 72 dpi i w druku będzie widocznie rozmyta. Powiększenie takiego pliku w edytorze nie dodaje mu szczegółów — potrzebujesz oryginału w wysokiej rozdzielczości albo logo w formie wektorowej.</p>
       <p><strong>Spady 3 mm.</strong> Rozszerz tło projektu o 3 mm poza linię cięcia z każdej strony. Maszyna tnąca ma niewielką tolerancję i bez spadu na krawędzi może pojawić się biały pasek.</p>
       <p><strong>Margines bezpieczeństwa.</strong> Trzymaj logo i teksty co najmniej 5 mm od krawędzi oraz z dala od linii zagięć i miejsc mocowania sznurka. Element umieszczony w zgięciu będzie częściowo niewidoczny na gotowej torbie.</p>
-      <p><strong>Nie masz projektu?</strong> Wystarczy logo w dobrej jakości — <a href="/kontakt">przygotujemy layout torby</a> i wyślemy do akceptacji przed drukiem.</p>
+      <p><strong>Nie masz projektu?</strong> Wystarczy logo w dobrej jakości — <a href="/kontakt?projekt=torby&amp;tryb=projekt">przygotujemy layout torby</a> i wyślemy do akceptacji przed drukiem.</p>
     </div>
   </div>
 </section>
@@ -412,23 +409,43 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
   </div>
 </section>
 
-<!-- ===================== OPINIE ===================== -->
+<!-- ===================== GWARANCJE ===================== -->
 <section class="blk paper">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Opinie</span>
-      <h2 class="sec">Zaufali nam</h2>
+      <span class="eyebrow">Bez ryzyka</span>
+      <h2 class="sec">Na czym możesz polegać</h2>
     </div>
-    <div class="opinie">
-      <div class="opinia"><div class="stars">★★★★★</div><p>„Świetna jakość nadruku i szybka realizacja. Klienci pytają, gdzie takie robić."</p><div class="aut">Anna · butik odzieżowy</div></div>
-      <div class="opinia"><div class="stars">★★★★★</div><p>„Prosta wycena bez dzwonienia. Torby z logo wyglądają dużo drożej niż kosztowały."</p><div class="aut">Marek · kawiarnia</div></div>
-      <div class="opinia"><div class="stars">★★★★★</div><p>„Wyłapali błąd w moim projekcie zanim poszło do druku. Duży plus."</p><div class="aut">Katarzyna · e-commerce</div></div>
+    <div class="grid3">
+      <div class="krok"><div class="n">✓</div><h3>Plik sprawdzony przed drukiem</h3><p>Każdy projekt weryfikujemy pod kątem spadów, rozdzielczości i trybu kolorów. Jeśli coś grozi wpadką, dzwonimy lub piszemy, zanim maszyna ruszy.</p></div>
+      <div class="krok"><div class="n">✓</div><h3>Dodruk na nasz koszt</h3><p>Jeśli błąd leży po naszej stronie, powtarzamy nakład bez dopłaty. Nie negocjujemy i nie szukamy winnego.</p></div>
+      <div class="krok"><div class="n">✓</div><h3>Cena bez gwiazdek</h3><p>Kwota z kalkulatora to kwota z faktury. Nie doliczamy opłat za przygotowanie do druku ani za sprawdzenie pliku.</p></div>
     </div>
-    <p class="reversal"><b>Gwarancja spokoju:</b> jeśli błąd jest po naszej stronie — dodruk bez dopłaty.</p>
+    <p class="reversal" style="margin-top:32px">Jesteśmy młodą firmą i nie zbieramy jeszcze opinii — dlatego zamiast obietnic pokazujemy konkretne ceny i jasne zasady. <a href="/kontakt" style="color:var(--gold-d);text-decoration:underline">Napisz do nas</a>, jeśli chcesz najpierw zobaczyć próbkę.</p>
   </div>
 </section>
 
 <!-- ===================== FAQ ===================== -->
+
+<!-- ===================== PROJEKT ===================== -->
+<section class="blk" id="projekt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Nie masz projektu?</span>
+      <h2 class="sec">To nie problem — zaprojektujemy</h2>
+    </div>
+    <div class="tresc">
+      <p>Projekt torby to nie płaska grafika — trzeba uwzględnić zagięcia, dno i boki. Przygotujemy layout na wykrojniku, tak żeby logo nie wylądowało w zgięciu ani pod uchwytem.</p>
+      <p>Za przygotowaniem plików stoi <strong>trzydzieści lat doświadczenia w poligrafii</strong>. Wiemy, gdzie kolor z ekranu rozjedzie się w druku, ile spadu potrzeba przy danym wykończeniu i które elementy projektu sprawią kłopot na maszynie. To wiedza, którą trudno nadrobić samym programem graficznym.</p>
+      <p>Pracujemy na tym, co masz — logo, zdjęciach, starych materiałach, a nawet na zdjęciu wizytówki zrobionym telefonem. Jeśli nie masz nic poza nazwą firmy, też sobie poradzimy.</p>
+      <p>Wycenę projektu podajemy z góry, przed rozpoczęciem pracy. Zanim cokolwiek pójdzie do druku, dostajesz wizualizację do akceptacji.</p>
+      <p style="margin-top:26px">
+        <a href="/kontakt?projekt=torby&amp;tryb=projekt" class="btn btn-primary" style="text-decoration:none">Opisz, czego potrzebujesz</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="blk">
   <div class="wrap faq">
     <div class="sec-head">
@@ -468,7 +485,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       </div>
       <div>
         <strong>Oferta</strong>
-        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a>
+        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a><a href="/torby-prezentowe">Torby na prezenty</a>
       </div>
       <div>
         <strong>Informacje</strong>
