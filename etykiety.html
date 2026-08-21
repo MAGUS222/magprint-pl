@@ -455,19 +455,26 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       var b = e.target.closest('.chip'); if(!b) return;
       var grp = group.dataset.group;
 
-      if(grp === 'postac'){ sel.postac = b.dataset.val; renderNaklad(); }
-      else if(grp === 'ksztalt'){ sel.ksztalt = b.dataset.val; renderRozmiary(); renderNaklad(); }
-      else if(grp === 'rozmiar'){ sel.rozmiar = b.dataset.val; renderNaklad(); }
-      else if(grp === 'material'){ sel.material = b.dataset.val; }
+      if(grp === 'postac') sel.postac = b.dataset.val;
+      else if(grp === 'ksztalt') sel.ksztalt = b.dataset.val;
+      else if(grp === 'rozmiar') sel.rozmiar = b.dataset.val;
+      else if(grp === 'material') sel.material = b.dataset.val;
       else if(grp === 'naklad'){
         if(sel.postac === 'arkusz') sel.naklad_arkusz = b.dataset.val;
         else sel.naklad_rolka = b.dataset.val;
       }
 
-      if(grp === 'postac' || grp === 'ksztalt' || grp === 'material'){
-        group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
-        b.classList.add('on');
-      }
+      // Zawsze podświetl kliknięty chip w JEGO grupie — niezależnie od tego,
+      // czy inna grupa zostanie zaraz przerenderowana.
+      group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+      b.classList.add('on');
+
+      // Grupy zależne trzeba przebudować (ich opcje/etykiety zmieniają się),
+      // renderRozmiary()/renderNaklad() same ustawiają poprawną klasę 'on'.
+      if(grp === 'ksztalt'){ renderRozmiary(); renderNaklad(); }
+      else if(grp === 'postac'){ renderNaklad(); }
+      else if(grp === 'rozmiar'){ renderNaklad(); }
+
       licz();
     });
   });
