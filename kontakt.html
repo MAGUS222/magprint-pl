@@ -77,6 +77,14 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
           <a href="/torby-prezentowe">Torby na prezenty</a>
         </div>
       </div>
+      <div class="drop">
+        <a href="/naklejki-etykiety">Naklejki ▾</a>
+        <div class="drop-menu">
+          <a href="/naklejki-etykiety">Naklejki (folia)</a>
+          <a href="/etykiety">Etykiety (papier)</a>
+          <a href="/magnesy">Magnesy</a>
+        </div>
+      </div>
       <a href="/kontakt" style="color:var(--ink);font-weight:600">Kontakt</a>
     </nav>
   </div>
@@ -115,6 +123,9 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
         <option value="Wycena teczek ofertowych">Wycena teczek ofertowych</option>
         <option value="Wycena toreb reklamowych">Wycena toreb reklamowych</option>
         <option value="Wycena toreb na prezenty">Wycena toreb na prezenty</option>
+        <option value="Wycena naklejek">Wycena naklejek</option>
+        <option value="Wycena etykiet">Wycena etykiet</option>
+        <option value="Wycena magnesów">Wycena magnesów</option>
         <option value="Produkt spoza oferty">Produkt spoza oferty</option>
         <option value="Inne">Inne</option>
       </select>
@@ -138,7 +149,10 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     'katalogi':         { temat:'Wycena katalogów',           nazwa:'katalogu' },
     'teczki':           { temat:'Wycena teczek ofertowych',   nazwa:'teczki ofertowej' },
     'torby':            { temat:'Wycena toreb reklamowych',   nazwa:'torby reklamowej' },
-    'torby-prezentowe': { temat:'Wycena toreb na prezenty',   nazwa:'torby na prezenty' }
+    'torby-prezentowe': { temat:'Wycena toreb na prezenty',   nazwa:'torby na prezenty' },
+    'naklejki':         { temat:'Wycena naklejek',            nazwa:'naklejek' },
+    'etykiety':         { temat:'Wycena etykiet',             nazwa:'etykiet' },
+    'magnesy':          { temat:'Wycena magnesów',            nazwa:'magnesów' }
   };
 
   var params  = new URLSearchParams(window.location.search);
