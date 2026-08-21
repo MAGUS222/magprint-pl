@@ -93,6 +93,11 @@ h2.sec{font-size:32px;margin-bottom:14px}
 .chip{background:#fff;border:1px solid var(--line);border-radius:2px;padding:11px 17px;cursor:pointer;font-size:14px;font-family:inherit;color:var(--ink);transition:.15s}
 .chip:hover{border-color:var(--ink)}
 .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.shape{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:108px;padding:14px 8px 12px;text-align:center}
+.chip.shape svg{width:42px;height:42px;flex-shrink:0}
+.chip.shape span{font-size:12.5px;line-height:1.3;color:var(--ink)}
+.chip.shape.on{background:#fff;border:2px solid var(--ink);padding:13px 7px 11px}
+.chip.shape.on span{color:var(--ink)}
 .price{border-top:1px solid var(--line);margin-top:6px;padding-top:26px;position:sticky;top:96px}
 .price .l{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .price .net{font-family:'Fraunces',serif;font-size:44px;font-weight:500;margin:6px 0 2px}
@@ -187,6 +192,40 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
   <div class="wrap">
     <div class="calc-grid">
       <div class="calc">
+        <div class="field">
+          <div class="lab">Kształt</div>
+          <div class="opts" data-group="ksztalt">
+            <button class="chip shape" data-val="okrag">
+              <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Okrąg</span>
+            </button>
+            <button class="chip shape" data-val="kwadrat">
+              <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Kwadrat</span>
+            </button>
+            <button class="chip shape" data-val="kwadratZ">
+              <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" rx="10" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Kwadrat zaokr.</span>
+            </button>
+            <button class="chip shape" data-val="owal">
+              <svg viewBox="0 0 64 64"><ellipse cx="32" cy="32" rx="24" ry="16" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Owal</span>
+            </button>
+            <button class="chip shape" data-val="prostokat">
+              <svg viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="28" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Prostokąt</span>
+            </button>
+            <button class="chip shape" data-val="prostokatZ">
+              <svg viewBox="0 0 64 64"><rect x="6" y="18" width="52" height="28" rx="9" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5"/></svg>
+              <span>Prostokąt zaokr.</span>
+            </button>
+            <button class="chip shape on" data-val="wlasny">
+              <svg viewBox="0 0 64 64"><path d="M32 7 38 24 57 25 42 37 47 56 32 45 17 56 22 37 7 25 26 24Z" fill="#efe9e0" stroke="#9b9488" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <span>Własny kontur</span>
+            </button>
+          </div>
+        </div>
+
         <div class="field">
           <div class="lab">Rozmiar (mieści się w polu)</div>
           <div class="opts" data-group="rozmiar">
@@ -347,8 +386,9 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
 (function(){
   var CENY = {"XS": {"25": 34.15, "50": 34.15, "100": 34.15, "250": 68.29, "500": 136.59}, "S": {"25": 25.61, "50": 25.61, "100": 51.22, "250": 128.05, "500": 256.1}, "M": {"25": 39.84, "50": 59.76, "100": 99.59, "250": 258.94, "500": 497.97}, "L": {"25": 56.91, "50": 99.59, "100": 184.96, "250": 455.28, "500": 896.34}};
   var ROZ_LABEL = {XS:'do 3×3 cm', S:'do 5×5 cm', M:'do 8×8 cm', L:'do 10×15 cm'};
+  var KSZTALT_LABEL = {okrag:'okrąg', kwadrat:'kwadrat', kwadratZ:'kwadrat zaokrąglony', owal:'owal', prostokat:'prostokąt', prostokatZ:'prostokąt zaokrąglony', wlasny:'własny kontur'};
 
-  var sel = { rozmiar:'XS', naklad:'100' };
+  var sel = { rozmiar:'XS', naklad:'100', ksztalt:'wlasny' };
   function fmt(n){ return n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
   function set(id, val){ var el = document.getElementById(id); if(el) el.value = val; }
 
@@ -359,7 +399,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     var wiersz = CENY[sel.rozmiar];
     var netto = (wiersz && sel.naklad !== 'inny' && wiersz[sel.naklad] != null) ? wiersz[sel.naklad] : null;
 
-    set('f-spec', 'Naklejki (folia) ' + ROZ_LABEL[sel.rozmiar]);
+    set('f-spec', 'Naklejki (folia), ' + KSZTALT_LABEL[sel.ksztalt] + ', ' + ROZ_LABEL[sel.rozmiar]);
     set('f-opcje', '');
 
     if(netto == null){
