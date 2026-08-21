@@ -162,7 +162,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           <a href="/torby-prezentowe">Torby na prezenty</a>
         </div>
       </div>
-      <a href="/naklejki-etykiety">Naklejki</a>
+      <a href="/naklejki">Naklejki</a>
       <a href="/etykiety" style="color:var(--ink);font-weight:600">Etykiety</a>
       <a href="/magnesy">Magnesy</a>
       <a href="/kontakt">Kontakt</a>
@@ -210,9 +210,26 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           </div>
         </div>
 
-        <div class="field">
+        <div class="field" id="blok-rozmiar-rolka">
           <div class="lab">Rozmiar</div>
           <div class="opts" data-group="rozmiar" id="opts-rozmiar"></div>
+        </div>
+
+        <div class="field" id="blok-rozmiar-arkusz" style="display:none">
+          <div class="lab" id="lab-rozmiar-arkusz">Średnica (mm)</div>
+          <div id="pole-bok" style="display:flex;align-items:center;gap:10px">
+            <input type="number" id="in-bok" min="5" max="470" step="1" value="30"
+                   style="width:100px;padding:11px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:14px;color:var(--ink)">
+            <span style="color:var(--muted);font-size:14px">mm</span>
+          </div>
+          <div id="pole-wh" style="display:none;align-items:center;gap:10px">
+            <input type="number" id="in-w" min="5" max="470" step="1" value="50"
+                   style="width:100px;padding:11px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:14px;color:var(--ink)">
+            <span style="color:var(--muted)">×</span>
+            <input type="number" id="in-h" min="5" max="470" step="1" value="30"
+                   style="width:100px;padding:11px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:14px;color:var(--ink)">
+            <span style="color:var(--muted);font-size:14px">mm</span>
+          </div>
         </div>
 
         <div class="field">
@@ -223,14 +240,25 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
           </div>
         </div>
 
-        <div class="field">
-          <div class="lab" id="lab-naklad">Liczba arkuszy</div>
+        <div class="field" id="blok-naklad-rolka">
+          <div class="lab" id="lab-naklad">Nakład (szt.)</div>
           <div class="opts" data-group="naklad" id="opts-naklad"></div>
         </div>
 
-        <div class="dane-disc">
+        <div class="field" id="blok-naklad-arkusz" style="display:none">
+          <div class="lab">Liczba arkuszy</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <input type="number" id="in-arkusze" min="1" step="1" value="5"
+                   style="width:100px;padding:11px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:14px;color:var(--ink)">
+            <span style="color:var(--muted);font-size:13px" id="ark-info"></span>
+          </div>
+        </div>
+
+        <div class="dane-disc" id="dane-disc-txt">
           Cena zależy od rozmiaru pola i materiału, nie od kształtu — okrąg, kwadrat i prostokąt
-          w tym samym rozmiarze kosztują tyle samo. Większe rozmiary i nakłady —
+          w tym samym rozmiarze kosztują tyle samo. <strong>Arkusz</strong>: wpisz dowolny rozmiar
+          (5–470&nbsp;mm) i liczbę arkuszy — cena liczy się na bieżąco. <strong>Rolka</strong>: stała
+          siatka rozmiarów i nakładów z oferty dostawcy. Większe zamówienia —
           <a href="/kontakt" style="color:var(--gold-d);text-decoration:underline">wycena indywidualna</a>.
         </div>
       </div>
@@ -349,7 +377,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       </div>
       <div>
         <strong>Oferta</strong>
-        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a><a href="/torby-prezentowe">Torby na prezenty</a><a href="/naklejki-etykiety">Naklejki</a><a href="/etykiety">Etykiety</a><a href="/magnesy">Magnesy</a>
+        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a><a href="/torby-prezentowe">Torby na prezenty</a><a href="/naklejki">Naklejki</a><a href="/etykiety">Etykiety</a><a href="/magnesy">Magnesy</a>
       </div>
       <div>
         <strong>Informacje</strong>
@@ -368,18 +396,39 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
   var ROLKA = {"30x30": {"papier": {"100": 105.3, "250": 214.39, "500": 422.29, "1000": 525.92, "2500": 563.38, "5000": 580.81}, "folia": {"100": 110.59, "250": 226.58, "500": 449.14, "1000": 563.74, "2500": 612.27, "5000": 638.14}}, "50x30": {"papier": {"100": 107.12, "250": 223.79, "500": 457.53, "1000": 602.4, "2500": 709.68, "5000": 785.06}, "folia": {"100": 112.64, "250": 237.18, "500": 488.82, "1000": 649.88, "2500": 777.04, "5000": 868.19}}, "50x50": {"papier": {"100": 117.17, "250": 231.57, "500": 443.53, "1000": 548.48, "2500": 616.43, "5000": 685.95}, "folia": {"100": 123.43, "250": 246.11, "500": 475.8, "1000": 594.73, "2500": 678.2, "5000": 761.29}}, "60x40": {"papier": {"100": 117.17, "250": 231.57, "500": 443.53, "1000": 548.48, "2500": 616.43, "5000": 685.95}, "folia": {"100": 123.43, "250": 246.11, "500": 475.8, "1000": 594.73, "2500": 678.2, "5000": 761.29}}, "80x80": {"papier": {"100": 137.55, "250": 313.07, "500": 621.9, "1000": 830.18, "2500": 1091.72, "5000": 1380.72}, "folia": {"100": 145.97, "250": 337.03, "500": 677.87, "1000": 914.92, "2500": 1215.95, "5000": 1545.2}}, "90x40": {"papier": {"100": 127.49, "250": 265.41, "500": 479.0, "1000": 578.08, "2500": 681.46, "5000": 816.81}, "folia": {"100": 134.63, "250": 283.36, "500": 516.92, "1000": 631.0, "2500": 753.89, "5000": 910.1}}, "90x60": {"papier": {"100": 133.64, "250": 294.53, "500": 566.32, "1000": 732.15, "2500": 932.18, "5000": 1161.42}, "folia": {"100": 141.56, "250": 316.16, "500": 615.28, "1000": 804.5, "2500": 1036.26, "5000": 1298.22}}, "100x70": {"papier": {"100": 135.69, "250": 304.24, "500": 595.43, "1000": 783.5, "2500": 1015.74, "5000": 1276.3}, "folia": {"100": 143.87, "250": 327.09, "500": 648.06, "1000": 862.34, "2500": 1130.38, "5000": 1427.59}}, "100x150": {"papier": {"100": 161.39, "250": 348.46, "500": 624.22, "1000": 805.23, "2500": 1083.41, "5000": 1407.45}, "folia": {"100": 172.54, "250": 378.79, "500": 686.77, "1000": 893.91, "2500": 1211.62, "5000": 1578.81}}};
 
   var KSZTALTY = {
-    okrag:      { label:'Okrąg', okragly:true, rozmiary:['30x30','50x50','80x80'] },
-    kwadrat:    { label:'Kwadrat', rozmiary:['30x30','50x50','80x80'] },
-    kwadratZ:   { label:'Kwadrat zaokrąglony', rozmiary:['30x30','50x50','80x80'] },
+    okrag:      { label:'Okrąg', okragly:true, sym:true, rozmiary:['30x30','50x50','80x80'] },
+    kwadrat:    { label:'Kwadrat', sym:true, rozmiary:['30x30','50x50','80x80'] },
+    kwadratZ:   { label:'Kwadrat zaokrąglony', sym:true, rozmiary:['30x30','50x50','80x80'] },
     owal:       { label:'Owal', okragly:true, rozmiary:['60x40','90x60'] },
     prostokat:  { label:'Prostokąt', rozmiary:['50x30','90x40','100x70','100x150'] },
     prostokatZ: { label:'Prostokąt zaokrąglony', rozmiary:['50x30','90x40','100x70','100x150'] }
   };
-  var ARK_LICZBY = [1,2,5,10,25,50];
   var ROLKA_NAKLADY = [100,250,500,1000,2500,5000];
   var MAT_LABEL = { papier:'papier samoprzylepny', folia:'folia winylowa' };
 
-  var sel = { postac:'arkusz', ksztalt:'okrag', rozmiar:'30x30', material:'papier', naklad_arkusz:'5', naklad_rolka:'500' };
+  // Stałe do przeliczenia dowolnego rozmiaru/nakładu na ARKUSZU (GPStudio).
+  // Arkusz 330x480mm, margines 5mm z każdej strony, odstęp 3mm między etykietami.
+  var ARK_W = 330, ARK_H = 480, ARK_MARG = 5, ARK_GAP = 3;
+  var PAP_ARK_NETTO = 3.50 / 1.23;   // netto/arkusz
+  var FOL_ARK_NETTO = 7.00 / 1.23;   // netto/arkusz
+
+  function yieldSheet(w, h){
+    var uw = ARK_W - 2*ARK_MARG, uh = ARK_H - 2*ARK_MARG;
+    function fit(a, b){
+      if(a > uw || b > uh) return 0;
+      return Math.floor((uw + ARK_GAP) / (a + ARK_GAP)) * Math.floor((uh + ARK_GAP) / (b + ARK_GAP));
+    }
+    return Math.max(fit(w, h), fit(h, w));
+  }
+  function narzut(areaCm2){
+    if(areaCm2 <= 12) return 6.0;
+    if(areaCm2 <= 30) return 4.5;
+    if(areaCm2 <= 70) return 3.5;
+    return 2.5;
+  }
+
+  var sel = { postac:'arkusz', ksztalt:'okrag', rozmiar:'30x30', material:'papier',
+              naklad_rolka:'500', ark_w:30, ark_h:30, ark_liczba:5 };
 
   function fmt(n){ return n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
   function set(id, val){ var el = document.getElementById(id); if(el) el.value = val; }
@@ -388,6 +437,11 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     var parts = rozmiar.split('x');
     var k = KSZTALTY[ksztalt];
     return (k && k.okragly) ? ('Ø ' + parts[0] + ' mm') : (parts[0] + '×' + parts[1] + ' mm');
+  }
+  function rozmiarLabelArkusz(ksztalt, w, h){
+    if(ksztalt === 'okrag') return 'Ø ' + w + ' mm';
+    if(ksztalt === 'kwadrat' || ksztalt === 'kwadratZ') return 'bok ' + w + ' mm';
+    return w + '×' + h + ' mm';
   }
 
   function renderRozmiary(){
@@ -402,35 +456,76 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
 
   function renderNaklad(){
     var cont = document.getElementById('opts-naklad');
-    var lab = document.getElementById('lab-naklad');
-    if(sel.postac === 'arkusz'){
-      lab.textContent = 'Liczba arkuszy';
-      var y = ARKUSZ[sel.rozmiar].y;
-      cont.innerHTML = ARK_LICZBY.map(function(n){
-        var on = (String(n) === sel.naklad_arkusz) ? ' on' : '';
-        return '<button class="chip'+on+'" data-val="'+n+'">'+n+' ark. <span>('+(n*y).toLocaleString('pl-PL')+' szt.)</span></button>';
-      }).join('');
+    cont.innerHTML = ROLKA_NAKLADY.map(function(n){
+      var on = (String(n) === sel.naklad_rolka) ? ' on' : '';
+      return '<button class="chip'+on+'" data-val="'+n+'">'+n.toLocaleString('pl-PL')+'</button>';
+    }).join('');
+  }
+
+  // Pokazuje albo blok "arkusz" (pola do wpisania), albo blok "rolka" (chipy ze stałej siatki).
+  function updatePostacUI(){
+    var isArkusz = sel.postac === 'arkusz';
+    document.getElementById('blok-rozmiar-rolka').style.display = isArkusz ? 'none' : 'block';
+    document.getElementById('blok-rozmiar-arkusz').style.display = isArkusz ? 'block' : 'none';
+    document.getElementById('blok-naklad-rolka').style.display = isArkusz ? 'none' : 'block';
+    document.getElementById('blok-naklad-arkusz').style.display = isArkusz ? 'block' : 'none';
+    if(isArkusz) updateArkuszRozmiarUI();
+    else { renderRozmiary(); renderNaklad(); }
+  }
+
+  // Przełącza pojedyncze pole (Ø / bok) vs dwa pola (szerokość x wysokość) wg kształtu.
+  function updateArkuszRozmiarUI(){
+    var k = KSZTALTY[sel.ksztalt];
+    var poleBok = document.getElementById('pole-bok');
+    var poleWh = document.getElementById('pole-wh');
+    var lab = document.getElementById('lab-rozmiar-arkusz');
+    if(k.sym){
+      poleBok.style.display = 'flex';
+      poleWh.style.display = 'none';
+      lab.textContent = (sel.ksztalt === 'okrag') ? 'Średnica (mm)' : 'Bok (mm)';
+      sel.ark_h = sel.ark_w;
+      set('in-bok', sel.ark_w);
     } else {
-      lab.textContent = 'Nakład (szt.)';
-      cont.innerHTML = ROLKA_NAKLADY.map(function(n){
-        var on = (String(n) === sel.naklad_rolka) ? ' on' : '';
-        return '<button class="chip'+on+'" data-val="'+n+'">'+n.toLocaleString('pl-PL')+'</button>';
-      }).join('');
+      poleBok.style.display = 'none';
+      poleWh.style.display = 'flex';
+      lab.textContent = 'Szerokość × wysokość (mm)';
+      if(!sel.ark_h) sel.ark_h = sel.ark_w;
+      set('in-w', sel.ark_w);
+      set('in-h', sel.ark_h);
     }
   }
 
   function licz(){
     var net = document.getElementById('net'), br = document.getElementById('br'), per = document.getElementById('per');
-    var netto, szt;
+    var netto, szt, btn = document.getElementById('order-btn');
 
     if(sel.postac === 'arkusz'){
-      var rowA = ARKUSZ[sel.rozmiar];
-      netto = rowA[sel.material][sel.naklad_arkusz];
-      szt = parseInt(sel.naklad_arkusz, 10) * rowA.y;
+      var w = sel.ark_w, h = sel.ark_h, liczba = sel.ark_liczba;
+      var y = yieldSheet(w, h);
+      var infoEl = document.getElementById('ark-info');
+      var invalid = !w || !h || w < 5 || h < 5 || !liczba || liczba < 1 || y <= 0;
+
+      if(invalid){
+        net.textContent = '—';
+        br.textContent  = 'Wpisz poprawny rozmiar';
+        per.textContent = 'Maks. ok. 320×470 mm w jednej z osi';
+        if(infoEl) infoEl.textContent = '';
+        if(btn){ btn.disabled = true; btn.style.opacity = '.5'; btn.style.cursor = 'not-allowed'; }
+        return;
+      }
+      if(btn){ btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
+
+      var areaCm2 = (w * h) / 100;
+      var n = narzut(areaCm2);
+      var cenaArkusza = (sel.material === 'papier') ? PAP_ARK_NETTO : FOL_ARK_NETTO;
+      netto = cenaArkusza * liczba * n;
+      szt = y * liczba;
+      if(infoEl) infoEl.textContent = 'Z 1 arkusza: ' + y + ' szt. · razem ' + szt.toLocaleString('pl-PL') + ' szt.';
     } else {
       var rowR = ROLKA[sel.rozmiar];
       netto = rowR[sel.material][sel.naklad_rolka];
       szt = parseInt(sel.naklad_rolka, 10);
+      if(btn){ btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
     }
 
     netto = Math.round(netto * 100) / 100;
@@ -440,11 +535,13 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     per.textContent = fmt(brutto/szt) + ' / szt. brutto · ' + szt.toLocaleString('pl-PL') + ' szt.';
 
     var ksztaltLabel = KSZTALTY[sel.ksztalt].label;
-    var rozmiarLab = rozmiarLabel(sel.ksztalt, sel.rozmiar);
     var postacLabel = sel.postac === 'arkusz' ? 'arkusz (cięte na sztuki)' : 'rolka (do aplikacji)';
+    var rozmiarLab = (sel.postac === 'arkusz')
+      ? rozmiarLabelArkusz(sel.ksztalt, sel.ark_w, sel.ark_h)
+      : rozmiarLabel(sel.ksztalt, sel.rozmiar);
 
     set('f-spec', 'Etykiety — ' + postacLabel + ', ' + ksztaltLabel + ' ' + rozmiarLab + ', ' + MAT_LABEL[sel.material]);
-    set('f-opcje', sel.postac === 'arkusz' ? (sel.naklad_arkusz + ' arkuszy') : '');
+    set('f-opcje', sel.postac === 'arkusz' ? (sel.ark_liczba + ' arkuszy') : '');
     set('f-naklad', szt);
     set('f-netto', netto.toFixed(2));
     set('f-brutto', brutto.toFixed(2));
@@ -459,31 +556,47 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       else if(grp === 'ksztalt') sel.ksztalt = b.dataset.val;
       else if(grp === 'rozmiar') sel.rozmiar = b.dataset.val;
       else if(grp === 'material') sel.material = b.dataset.val;
-      else if(grp === 'naklad'){
-        if(sel.postac === 'arkusz') sel.naklad_arkusz = b.dataset.val;
-        else sel.naklad_rolka = b.dataset.val;
-      }
+      else if(grp === 'naklad') sel.naklad_rolka = b.dataset.val;
 
       // Zawsze podświetl kliknięty chip w JEGO grupie — niezależnie od tego,
       // czy inna grupa zostanie zaraz przerenderowana.
       group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
       b.classList.add('on');
 
-      // Grupy zależne trzeba przebudować (ich opcje/etykiety zmieniają się),
-      // renderRozmiary()/renderNaklad() same ustawiają poprawną klasę 'on'.
-      if(grp === 'ksztalt'){ renderRozmiary(); renderNaklad(); }
-      else if(grp === 'postac'){ renderNaklad(); }
-      else if(grp === 'rozmiar'){ renderNaklad(); }
+      // Grupy zależne trzeba przebudować (ich opcje/etykiety zmieniają się).
+      if(grp === 'postac'){ updatePostacUI(); }
+      else if(grp === 'ksztalt'){
+        if(sel.postac === 'rolka'){ renderRozmiary(); renderNaklad(); }
+        else { updateArkuszRozmiarUI(); }
+      }
 
       licz();
     });
   });
 
+  // Pola do wpisania rozmiaru/liczby arkuszy (tylko postać Arkusz).
+  document.getElementById('in-bok').addEventListener('input', function(){
+    var v = parseFloat(this.value) || 0;
+    sel.ark_w = v; sel.ark_h = v;
+    licz();
+  });
+  document.getElementById('in-w').addEventListener('input', function(){
+    sel.ark_w = parseFloat(this.value) || 0;
+    licz();
+  });
+  document.getElementById('in-h').addEventListener('input', function(){
+    sel.ark_h = parseFloat(this.value) || 0;
+    licz();
+  });
+  document.getElementById('in-arkusze').addEventListener('input', function(){
+    sel.ark_liczba = parseInt(this.value, 10) || 0;
+    licz();
+  });
+
   var of = document.getElementById('order-form');
   if(of) of.addEventListener('submit', function(){ licz(); });
 
-  renderRozmiary();
-  renderNaklad();
+  updatePostacUI();
   licz();
 })();
 </script>
