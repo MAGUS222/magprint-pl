@@ -57,10 +57,26 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdro
 .hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px;max-width:1160px;margin:0 auto;padding:0 24px}
 .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px}
 .logo b{color:var(--gold-d)}
-nav.top{display:flex;gap:6px}
+nav.top{display:flex;align-items:center;gap:6px}
 nav.top a{font-size:14px;padding:8px 12px;border-radius:8px;color:var(--muted)}
 nav.top a:hover{color:var(--ink)}
-@media(max-width:880px){nav.top{display:none}}
+nav.top .drop{position:relative;display:flex;align-items:center}
+nav.top .drop>a{display:flex;align-items:center;gap:4px}
+nav.top .drop-menu{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.1);padding:6px;min-width:190px;opacity:0;visibility:hidden;transform:translateY(4px);transition:.15s}
+nav.top .drop:hover .drop-menu,nav.top .drop:focus-within .drop-menu{opacity:1;visibility:visible;transform:translateY(0)}
+nav.top .drop-menu a{display:block;padding:9px 12px;border-radius:6px;font-size:14px;white-space:nowrap}
+nav.top .drop-menu a:hover{background:var(--paper)}
+@media(max-width:1080px){nav.top a{padding:8px 9px;font-size:13px}}
+@media(max-width:880px){
+  .hdr{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:12px;gap:10px}
+  nav.top{order:3;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+          gap:2px;padding-bottom:2px;scrollbar-width:none}
+  nav.top::-webkit-scrollbar{display:none}
+  nav.top a{white-space:nowrap;flex:0 0 auto}
+  nav.top .drop{display:contents}
+  nav.top .drop>a{display:none}
+  nav.top .drop-menu{display:contents;position:static}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:2px;font-weight:500;font-size:15px;padding:14px 26px;background:var(--ink);color:#fff}
 .btn-sm{padding:10px 18px;font-size:14px}
 .hero{padding:56px 0 24px;background:linear-gradient(180deg,#fff,var(--paper))}
@@ -99,8 +115,16 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
       <a href="/wizytowki">Wizytówki</a>
       <a href="/katalogi-szyte">Katalogi</a>
       <a href="/teczki-ofertowe">Teczki</a>
-      <a href="/torby-reklamowe">Torby</a>
-      <a href="/jak-zamawiac">Jak zamawiać</a>
+      <div class="drop">
+        <a href="/torby-reklamowe">Torby ▾</a>
+        <div class="drop-menu">
+          <a href="/torby-reklamowe">Torby reklamowe</a>
+          <a href="/torby-prezentowe">Torby na prezenty</a>
+        </div>
+      </div>
+      <a href="/naklejki">Naklejki</a>
+      <a href="/etykiety">Etykiety</a>
+      <a href="/magnesy">Magnesy</a>
       <a href="/kontakt">Kontakt</a>
     </nav>
     <a href="/ulotki#kalkulator" class="btn btn-sm">Wyceń online</a>
@@ -203,6 +227,45 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
   </table>
   <div class="uwaga">Cena zależy od formatu, koloru torby, liczby zadrukowanych stron i liczby kolorów nadruku. Pełną wycenę policzysz w <a href="/torby-prezentowe#kalkulator" style="color:var(--gold-d);text-decoration:underline">kalkulatorze</a>. To inny produkt niż torby reklamowe CMYK — porównanie znajdziesz na stronie produktu.</div>
 
+  <h2>Naklejki (folia)</h2>
+  <p class="podtyt">Folia winylowa biała, zadruk CMYK, wycięcie po obrysie ploterem (dowolny kształt). Ceny brutto.</p>
+  <table>
+    <thead><tr><th>Rozmiar</th><th class="n">100 szt.</th><th class="n">250 szt.</th><th class="n">500 szt.</th></tr></thead>
+    <tbody>
+      <tr><td>XS (do 3×3 cm)</td><td class="n">42,00 zł</td><td class="n">84,00 zł</td><td class="n">168,01 zł</td></tr>
+      <tr><td>S (do 5×5 cm)</td><td class="n">63,00 zł</td><td class="n">157,50 zł</td><td class="n">315,00 zł</td></tr>
+      <tr><td>M (do 8×8 cm)</td><td class="n">122,50 zł</td><td class="n">318,50 zł</td><td class="n">612,50 zł</td></tr>
+      <tr><td>L (do 10×15 cm)</td><td class="n">227,50 zł</td><td class="n">559,99 zł</td><td class="n">1 102,50 zł</td></tr>
+    </tbody>
+  </table>
+  <div class="uwaga">Minimalne zamówienie to 1 arkusz. Folia jest odporna na wodę i ścieranie — sprawdzi się na zewnątrz oraz na opakowaniach. Pełną wycenę policzysz w <a href="/naklejki#kalkulator" style="color:var(--gold-d);text-decoration:underline">kalkulatorze</a>.</div>
+
+  <h2>Etykiety — arkusz lub rolka</h2>
+  <p class="podtyt">Sześć kształtów (okrąg, kwadrat, owal, prostokąt i warianty zaokrąglone), papier lub folia, zadruk CMYK. Ceny brutto dla rozmiaru 50×50 mm — pełna siatka rozmiarów w <a href="/etykiety#kalkulator" style="color:var(--gold-d);text-decoration:underline">kalkulatorze</a>.</p>
+  <table>
+    <thead><tr><th>Wariant</th><th class="n">Najmniejszy nakład</th><th class="n">Środkowy nakład</th><th class="n">Największy z tabeli</th></tr></thead>
+    <tbody>
+      <tr><td>Arkusz, papier (1 / 5 / 50 ark. = 48 / 240 / 2 400 szt.)</td><td class="n">15,74 zł</td><td class="n">78,74 zł</td><td class="n">787,50 zł</td></tr>
+      <tr><td>Arkusz, folia (1 / 5 / 50 ark. = 48 / 240 / 2 400 szt.)</td><td class="n">31,50 zł</td><td class="n">157,50 zł</td><td class="n">1 575,00 zł</td></tr>
+      <tr><td>Rolka, papier (100 / 500 / 1 000 szt.)</td><td class="n">144,12 zł</td><td class="n">545,54 zł</td><td class="n">674,63 zł</td></tr>
+      <tr><td>Rolka, folia (100 / 500 / 1 000 szt.)</td><td class="n">151,82 zł</td><td class="n">585,23 zł</td><td class="n">731,52 zł</td></tr>
+    </tbody>
+  </table>
+  <div class="uwaga"><b>Arkusz</b> — cięte na sztuki, do ręcznego odklejania, minimum 1 arkusz. <b>Rolka</b> — do aplikacji ręcznej lub automatycznej etykieciarką, minimum 100 szt. Kształt nie wpływa na cenę — liczy się tylko rozmiar i materiał. Pełną wycenę dla dowolnej kombinacji policzysz w <a href="/etykiety#kalkulator" style="color:var(--gold-d);text-decoration:underline">kalkulatorze</a>.</div>
+
+  <h2>Magnesy reklamowe</h2>
+  <p class="podtyt">Folia magnetyczna, zadruk CMYK, folia błysk lub mat, wycięcie po obrysie. Ceny brutto, grubość 0,3 mm (elastyczna) / 0,6 mm (sztywna).</p>
+  <table>
+    <thead><tr><th>Rozmiar</th><th class="n">100 szt. (0,3 mm)</th><th class="n">100 szt. (0,6 mm)</th><th class="n">500 szt. (0,3 mm)</th></tr></thead>
+    <tbody>
+      <tr><td>S (Ø 5,6 cm / 5,5×5,5 cm)</td><td class="n">168,01 zł</td><td class="n">216,00 zł</td><td class="n">672,00 zł</td></tr>
+      <tr><td>M (6×9 cm)</td><td class="n">252,00 zł</td><td class="n">323,99 zł</td><td class="n">1 176,00 zł</td></tr>
+      <tr><td>L (Ø 8 cm / 8×8 cm)</td><td class="n">293,99 zł</td><td class="n">378,00 zł</td><td class="n">1 428,01 zł</td></tr>
+      <tr><td>XL (10×15 cm)</td><td class="n">714,00 zł</td><td class="n">918,00 zł</td><td class="n">3 528,00 zł</td></tr>
+    </tbody>
+  </table>
+  <div class="uwaga">Minimalne zamówienie to 1 arkusz. Pełną wycenę policzysz w <a href="/magnesy#kalkulator" style="color:var(--gold-d);text-decoration:underline">kalkulatorze</a>.</div>
+
   <h2>Co wpływa na cenę druku</h2>
   <p class="podtyt">Cztery czynniki decydują o kwocie, którą zobaczysz w kalkulatorze.</p>
   <p style="color:var(--muted);margin-bottom:12px"><b style="color:var(--ink)">Nakład.</b> To najsilniejszy czynnik. Koszt przygotowania do druku rozkłada się na wszystkie egzemplarze, więc cena za sztukę spada tym szybciej, im większe zamówienie. Przy ulotkach A5 różnica między 100 a 5000 sztuk to spadek z 1,31 zł do 12 groszy za sztukę.</p>
@@ -217,6 +280,9 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:40px 0;f
     <details><summary>Ile kosztuje druk 100 katalogów A4?</summary><p>100 katalogów A4 o objętości 8 stron, na kredzie 130 g z drukiem pełnokolorowym, kosztuje 563,80 zł brutto. Wersja 16-stronicowa to 954,02 zł brutto, a 24-stronicowa 1344,25 zł brutto. Katalogi drukujemy już od 5 sztuk, w formatach A6, A5, B5 i A4.</p></details>
     <details><summary>Ile kosztuje druk 100 teczek ofertowych?</summary><p>100 teczek A4 1-bigowych z drukiem CMYK kosztuje 295,20 zł brutto. Wersja 2-bigowa z drukiem dwustronnym to 324,72 zł brutto.</p></details>
     <details><summary>Ile kosztuje 100 toreb na prezenty z logo?</summary><p>100 toreb prezentowych A4 w kolorze czarnym, z logo odbitym sitodrukiem w jednym kolorze po jednej stronie, kosztuje 344,71 zł brutto, czyli około 3,45 zł za sztukę.</p></details>
+    <details><summary>Ile kosztuje 100 naklejek reklamowych?</summary><p>100 naklejek na folii winylowej w rozmiarze S (do 5×5 cm) kosztuje 63,00 zł brutto. Naklejki wycinane są po obrysie w dowolnym kształcie, minimalne zamówienie to 1 arkusz.</p></details>
+    <details><summary>Czym różnią się naklejki od etykiet?</summary><p>Naklejki (magprint.pl/naklejki) to zawsze folia winylowa, odporna na wodę i ścieranie. Etykiety (magprint.pl/etykiety) dają wybór materiału — papier (tańszy, do suchych warunków) lub folia — a dodatkowo postaci: arkusz do ręcznego cięcia albo rolka do aplikacji automatycznej etykieciarką.</p></details>
+    <details><summary>Ile kosztuje 100 magnesów reklamowych?</summary><p>100 magnesów w rozmiarze S na folii 0,3 mm (elastycznej) kosztuje 168,01 zł brutto. Wersja sztywniejsza, na folii 0,6 mm, to 216,00 zł brutto.</p></details>
     <details><summary>Jaki jest najtańszy druk przy bardzo małym nakładzie?</summary><p>Ulotki. Już 10 sztuk A6 na kredzie 170 g kosztuje 53,05 zł brutto. Przy małych nakładach nie ma sensu wybierać dużych formatów — koszt rośnie proporcjonalnie do powierzchni papieru.</p></details>
     <details><summary>Czy cena zawiera sprawdzenie plików?</summary><p>Tak, w każdej cenie zawarte jest bezpłatne sprawdzenie przygotowania pliku do druku. Jeśli coś wymaga poprawy — spady, rozdzielczość, tryb kolorów — informujemy przed rozpoczęciem produkcji.</p></details>
     <details><summary>Czy ceny zawierają VAT?</summary><p>W tabelach podajemy ceny brutto z 23% VAT. Kalkulator na każdej podstronie produktowej pokazuje równolegle cenę netto i brutto.</p></details>

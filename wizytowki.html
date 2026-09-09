@@ -57,10 +57,26 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdro
 .hdr{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
 .logo{font-family:'Fraunces',serif;font-weight:600;font-size:23px;letter-spacing:-.02em}
 .logo b{color:var(--gold-d);font-weight:600}
-nav.top{display:flex;gap:6px}
+nav.top{display:flex;align-items:center;gap:6px}
 nav.top a{font-size:14px;padding:8px 12px;border-radius:8px;color:var(--muted);transition:.15s}
 nav.top a:hover{color:var(--ink)}
-@media(max-width:880px){nav.top{display:none}}
+nav.top .drop{position:relative;display:flex;align-items:center}
+nav.top .drop>a{display:flex;align-items:center;gap:4px}
+nav.top .drop-menu{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.1);padding:6px;min-width:190px;opacity:0;visibility:hidden;transform:translateY(4px);transition:.15s}
+nav.top .drop:hover .drop-menu,nav.top .drop:focus-within .drop-menu{opacity:1;visibility:visible;transform:translateY(0)}
+nav.top .drop-menu a{display:block;padding:9px 12px;border-radius:6px;font-size:14px;white-space:nowrap}
+nav.top .drop-menu a:hover{background:var(--paper)}
+@media(max-width:1080px){nav.top a{padding:8px 9px;font-size:13px}}
+@media(max-width:880px){
+  .hdr{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:12px;gap:10px}
+  nav.top{order:3;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+          gap:2px;padding-bottom:2px;scrollbar-width:none}
+  nav.top::-webkit-scrollbar{display:none}
+  nav.top a{white-space:nowrap;flex:0 0 auto}
+  nav.top .drop{display:contents}
+  nav.top .drop>a{display:none}
+  nav.top .drop-menu{display:contents;position:static}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:2px;font-weight:500;cursor:pointer;font-size:15px;padding:14px 26px;transition:.18s;font-family:inherit}
 .btn-primary{background:var(--ink);color:#fff}
 .btn-primary:hover{background:#000}
@@ -140,11 +156,19 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
     <a href="/" class="logo"><b>mag</b>print<span style="color:var(--muted);font-weight:400">.pl</span></a>
     <nav class="top">
       <a href="/ulotki">Ulotki</a>
-      <a href="/wizytowki">Wizytówki</a>
+      <a href="/wizytowki" style="color:var(--ink);font-weight:600">Wizytówki</a>
       <a href="/katalogi-szyte">Katalogi</a>
       <a href="/teczki-ofertowe">Teczki</a>
-      <a href="/torby-reklamowe">Torby</a>
-      <a href="/jak-zamawiac">Jak zamawiać</a>
+      <div class="drop">
+        <a href="/torby-reklamowe">Torby ▾</a>
+        <div class="drop-menu">
+          <a href="/torby-reklamowe">Torby reklamowe</a>
+          <a href="/torby-prezentowe">Torby na prezenty</a>
+        </div>
+      </div>
+      <a href="/naklejki">Naklejki</a>
+      <a href="/etykiety">Etykiety</a>
+      <a href="/magnesy">Magnesy</a>
       <a href="/kontakt">Kontakt</a>
     </nav>
     <a href="#kalkulator" class="btn btn-primary btn-sm">Wyceń online</a>
@@ -218,10 +242,10 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       <h2 class="sec">Druk bez niespodzianek</h2>
     </div>
     <div class="grid4">
-      <div class="cell"><div class="ic">💸</div><h3>Cena od razu</h3><p>Widzisz kwotę zanim zamówisz.</p></div>
-      <div class="cell"><div class="ic">🛡️</div><h3>Sprawdzenie plików</h3><p>Weryfikujemy projekt przed drukiem gratis.</p></div>
-      <div class="cell"><div class="ic">🚚</div><h3>Szybka realizacja</h3><p>Standardowo kilka dni roboczych.</p></div>
-      <div class="cell"><div class="ic">♻️</div><h3>Poprawka gratis</h3><p>Błąd po naszej stronie — dodruk bez dopłaty.</p></div>
+      <div class="cell"><div class="ic"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#8f6f4c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M41.18 26.82 22 6H8v14l19.18 19.18a4 4 0 0 0 5.64 0l8.36-8.36a4 4 0 0 0 0-5.64Z"/><circle cx="14" cy="14" r="1.6" fill="#8f6f4c" stroke="none"/></svg></div><h3>Cena od razu</h3><p>Widzisz kwotę zanim zamówisz.</p></div>
+      <div class="cell"><div class="ic"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#8f6f4c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M28 4H12a4 4 0 0 0-4 4v32a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V16Z"/><path d="M28 4v12h12"/><path d="M18 30l4 4 8-8"/></svg></div><h3>Sprawdzenie plików</h3><p>Weryfikujemy projekt przed drukiem gratis.</p></div>
+      <div class="cell"><div class="ic"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#8f6f4c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="20"/><path d="M24 12v12l8 4"/></svg></div><h3>Szybka realizacja</h3><p>Standardowo kilka dni roboczych.</p></div>
+      <div class="cell"><div class="ic"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#8f6f4c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M46 8v12H34"/><path d="M2 40V28h12"/><path d="M7 18A18 18 0 0 1 37 11l9 9"/><path d="M2 28l9 9a18 18 0 0 0 30-7"/></svg></div><h3>Poprawka gratis</h3><p>Błąd po naszej stronie — dodruk bez dopłaty.</p></div>
     </div>
   </div>
 </section>
@@ -278,7 +302,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:56px 0 4
       </div>
       <div>
         <strong>Oferta</strong>
-        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a><a href="/torby-prezentowe">Torby na prezenty</a>
+        <a href="/ulotki">Ulotki</a><a href="/wizytowki">Wizytówki</a><a href="/katalogi-szyte">Katalogi szyte</a><a href="/teczki-ofertowe">Teczki ofertowe</a><a href="/torby-reklamowe">Torby reklamowe</a><a href="/torby-prezentowe">Torby na prezenty</a><a href="/naklejki">Naklejki</a><a href="/etykiety">Etykiety</a><a href="/magnesy">Magnesy</a>
       </div>
       <div>
         <strong>Informacje</strong>
