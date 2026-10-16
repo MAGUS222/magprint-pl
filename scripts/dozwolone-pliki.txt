@@ -1,0 +1,13 @@
+# Wzorce plików wolno śledzonych w repo / publikowanych na Cloudflare Pages.
+# Jedna linia = jeden wzorzec (glob w stylu shell: *, ?). Linie puste i # ignorowane.
+# Ustalono z git ls-files i odwołań w HTML: brak lokalnych CSS/JS/obrazów
+# (fonty i analytics z CDN; style/skrypty inline w HTML).
+
+*.html
+robots.txt
+sitemap.xml
+_headers
+_redirects
+.gitignore
+scripts/dozwolone-pliki.txt
+scripts/sprawdz-pliki-do-publikacji.sh

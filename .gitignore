@@ -1,3 +1,6 @@
 .claude/
+.cursor/
 .wrangler/
 .DS_Store
+*.log
+*.md
